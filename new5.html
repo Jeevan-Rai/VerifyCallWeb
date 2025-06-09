@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phone Mockup Banner - Final</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: #f0f0f0;
+        overflow-x: hidden;
+      }
+
+      .banner-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background: #f0f0f0;
+        overflow: hidden;
+      }
+
+      .wave-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgb(70, 70, 253);
+        clip-path: ellipse(80% 100% at 20% 0%);
+        z-index: 1;
+      }
+
+      .wave-background::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><defs><pattern id="grid" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M 5 0 L 0 0 0 5" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.3"/></pattern></defs><rect width="50" height="50" fill="url(%23grid)"/></svg>');
+        opacity: 0.7;
+      }
+
+      .content-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        padding: 0 5%;
+        justify-content: center; /* Center content horizontally */
+      }
+
+      .text-section {
+        position: absolute;
+        left: 8%;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 600px;
+      }
+
+      .share-text {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: bold;
+        color: white;
+        text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+        line-height: 1.1;
+        letter-spacing: -1px;
+        margin-bottom: 0.5rem;
+      }
+
+      .brand-text {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: bold;
+        color: white;
+        text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+        line-height: 1;
+        letter-spacing: -2px;
+        font-family: "Arial Black", Arial, sans-serif;
+      }
+
+      .with-text {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: bold;
+        color: white;
+        text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+        line-height: 1.1;
+        letter-spacing: -1px;
+        margin-top: 0.5rem;
+      }
+
+      .phones-container {
+        position: absolute;
+        right: 15%;
+        top: 10%;
+        perspective: 1200px;
+      }
+
+      .phone-mockup {
+        position: absolute;
+        width: 280px;
+        height: 550px;
+        background: #4a5568;
+        border-radius: 45px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), inset 0 0 0 8px #2d3748,
+          inset 0 0 0 12px #4a5568;
+        padding: 8px;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        cursor: pointer;
+      }
+
+      .phone-mockup.back-phone {
+        right: -80px;
+        top: 60px;
+        z-index: 2;
+        transform: rotate(0deg);
+      }
+
+      .phone-mockup.front-phone {
+        right: 0;
+        top: 0;
+        z-index: 3;
+        transform: rotate(0deg);
+      }
+
+      /* Hover states - back phone comes to front */
+      .phones-container:hover .phone-mockup.back-phone {
+        right: 0;
+        top: 0;
+        z-index: 4;
+        transform: rotate(0deg) scale(1.02);
+        box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4), inset 0 0 0 8px #2d3748,
+          inset 0 0 0 12px #4a5568;
+      }
+
+      /* Hover states - front phone goes to back */
+      .phones-container:hover .phone-mockup.front-phone {
+        right: -80px;
+        top: 60px;
+        z-index: 2;
+        transform: rotate(0deg) scale(0.98);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 0 0 8px #2d3748,
+          inset 0 0 0 12px #4a5568;
+      }
+
+      .phone-screen {
+        width: 100%;
+        height: 100%;
+        background: #f7fafc;
+        border-radius: 37px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 60px 40px;
+      }
+
+      /* Notch */
+      .notch {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 10px;
+        background: #4a5568;
+        border-radius: 0 0 25px 25px;
+        z-index: 15;
+      }
+
+      /* App Icon Circle */
+      .app-icon-circle {
+        width: 120px;
+        height: 120px;
+        background: #4299e1;
+        border-radius: 50%;
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+        color: white;
+        box-shadow: 0 10px 25px rgba(66, 153, 225, 0.3);
+      }
+
+      .app-title {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #2d3748;
+        text-align: center;
+      }
+
+      .app-description {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #4a5568;
+        font-weight: 400;
+        text-align: center;
+        max-width: 200px;
+      }
+
+      /* Home Indicator */
+      .home-indicator {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 134px;
+        height: 5px;
+        background: #a0aec0;
+        border-radius: 3px;
+      }
+
+      .edit-panel {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
+          0 0 0 1px rgba(255, 255, 255, 0.2);
+        z-index: 100;
+        max-width: 320px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .edit-panel h3 {
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .input-group {
+        margin-bottom: 18px;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #555;
+        font-size: 0.9rem;
+      }
+
+      .input-group input,
+      .input-group textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e1e5e9;
+        border-radius: 12px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background: #fafafa;
+      }
+
+      .input-group input:focus,
+      .input-group textarea:focus {
+        outline: none;
+        border-color: #dc143c;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1);
+      }
+
+      .input-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      @media (max-width: 1024px) {
+        .wave-background {
+          clip-path: ellipse(85% 100% at 25% 0%);
+        }
+
+        .phones-container {
+          right: 5%;
+          top: 15%;
+        }
+
+        .phone-mockup {
+          width: 250px;
+          height: 520px;
+        }
+
+        .phone-mockup.back-phone {
+          right: -70px;
+          top: 35px;
+        }
+
+        .phones-container:hover .phone-mockup.back-phone {
+          right: 0;
+          top: 0;
+        }
+
+        .phones-container:hover .phone-mockup.front-phone {
+          right: -70px;
+          top: 35px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .banner-container {
+          height: auto;
+          min-height: 100vh;
+          padding: 20px 0;
+        }
+
+        .wave-background {
+          clip-path: ellipse(100% 70% at 50% 0%);
+        }
+
+        .content-wrapper {
+          flex-direction: column;
+          justify-content: flex-start;
+          padding: 40px 20px;
+        }
+
+        .text-section {
+          position: relative;
+          left: auto;
+          top: auto;
+          transform: none;
+          text-align: center;
+          margin-bottom: 40px;
+        }
+
+        .phones-container {
+          position: relative;
+          right: auto;
+          top: auto;
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          height: 450px;
+        }
+
+        .phone-mockup {
+          width: 200px;
+          height: 420px;
+        }
+
+        .phone-mockup.back-phone {
+          right: -60px;
+          top: 20px;
+        }
+
+        .phone-mockup.front-phone {
+          right: 10px;
+        }
+
+        .phones-container:hover .phone-mockup.back-phone {
+          right: 10px;
+          top: 0;
+        }
+
+        .phones-container:hover .phone-mockup.front-phone {
+          right: -60px;
+          top: 20px;
+        }
+
+        .edit-panel {
+          position: relative;
+          top: auto;
+          right: auto;
+          margin: 20px;
+          max-width: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .phones-container {
+          top: 10%;
+        }
+
+        .phone-mockup {
+          width: 160px;
+          height: 340px;
+        }
+
+        .phone-screen {
+          padding: 40px 25px;
+        }
+
+        .app-icon-circle {
+          width: 80px;
+          height: 80px;
+          font-size: 40px;
+          margin-bottom: 25px;
+        }
+
+        .app-title {
+          font-size: 24px;
+          margin-bottom: 15px;
+        }
+
+        .app-description {
+          font-size: 16px;
+        }
+
+        .phone-mockup.back-phone {
+          right: -40px;
+          top: 15px;
+        }
+
+        .phones-container:hover .phone-mockup.back-phone {
+          right: 10px;
+          top: 0;
+        }
+
+        .phones-container:hover .phone-mockup.front-phone {
+          right: -40px;
+          top: 15px;
+        }
+      }
+
+      .hero-content {
+        /* Add margin-left to push content to the right */
+        margin-left: -500px; /* You can adjust this value as needed */
+        max-width: 600px;
+      }
+
+      .hero-content h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-align: left;
+      }
+
+      .hero-content h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .hero-content h1 span.dynamic-wrapper {
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+        vertical-align: middle;
+        /* Adjusted height to ensure enough space for descenders and prevent cutoff */
+        height: 1.3em; /* Slightly increased from 1.2em */
+      }
+
+      .hero-content h1 .dynamic-inner {
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .hero-content h1 .dynamic-inner span {
+        font-size: inherit;
+        /* Ensure line-height is consistent and allows for descenders */
+        line-height: 1.3em; /* Adjusted to match wrapper height */
+        color: white;
+      }
+
+      .hero-content p {
+        font-size: 1.2rem;
+        margin: 1.5rem auto;
+        max-width: 600px;
+        color: #e0e0e0;
+        margin-left: 0; /* Ensure no extra left margin on paragraph */
+        margin-right: auto; /* Allow paragraph to take up defined max-width and align left */
+      }
+
+      .download-app-btn {
+        display: flex;
+        align-items: center;
+        gap: 12px; /* Reduced gap for smaller spacing */
+        padding: 8px 16px; /* Reduced padding to make button smaller */
+        border: 2px solid black;
+        border-radius: 50px;
+        background-color: transparent;
+        cursor: pointer;
+        font-family: sans-serif;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.2s ease;
+        margin-left: 3px; /* Increased margin to move right */
+      }
+
+      .download-app-btn:hover {
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2); /* Adjusted hover shadow */
+      }
+
+      .app-text {
+        font-size: 14px; /* Slightly smaller font size */
+        font-weight: 500;
+        color: #000;
+        text-align: left;
+      }
+
+      .divider {
+        width: 1px;
+        height: 32px; /* Slightly shorter divider */
+        background-color: black;
+      }
+
+      .os-icons {
+        display: flex;
+        gap: 10px; /* Reduced gap */
+      }
+
+      .os-icon {
+        width: 40px; /* Smaller icon size */
+        height: 40px;
+        border: 1px solid #ddd;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        font-weight: 600;
+      }
+
+      .os-icon img {
+        width: 22px; /* Smaller image inside icon */
+        height: 22px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner-container">
+      <div class="wave-background"></div>
+
+      <div class="content-wrapper">
+        <div class="hero-content">
+          <h1 class="fade-slide-up fade-delay-1">
+            Trusted call alerts for <br />
+            <span class="dynamic-wrapper">
+              <span class="dynamic-inner" id="dynamicInner">
+                <span>verified businesses</span>
+                <span>banks</span>
+                <span>hospitals</span>
+                <span>delivery partners</span>
+                <span>insurance firms</span>
+              </span>
+            </span>
+          </h1>
+          <p class="fade-slide-up fade-delay-2">
+            VerifyCall helps users identify calls from registered organisations
+            — so they can trust who's calling and respond with confidence.
+          </p>
+          <button class="download-app-btn fade-slide-up fade-delay-3">
+            <span class="app-text">Download<br />The App</span>
+            <span class="divider"></span>
+            <span class="os-icons">
+              <span class="os-icon">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"
+                  alt="Android"
+                />
+              </span>
+              <span class="os-icon">iOS</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="phones-container">
+          <div class="phone-mockup back-phone">
+            <div class="phone-screen">
+              <div class="notch"></div>
+
+              <div class="app-icon-circle" id="app-icon-2">📞</div>
+              <div class="app-title" id="phone2-title">EXPERIENCE</div>
+              <div class="app-description" id="phone2-text">
+                Discover new features and create lasting memories with our
+                innovative platform
+              </div>
+
+              <div class="home-indicator"></div>
+            </div>
+          </div>
+
+          <div class="phone-mockup front-phone">
+            <div class="phone-screen">
+              <div class="notch"></div>
+
+              <div class="app-icon-circle" id="app-icon-1">🚀</div>
+              <div class="app-title" id="phone1-title">VERIFY CALL</div>
+              <div class="app-description" id="phone1-text">
+                Get Notified for verified Calls from verified organisations
+              </div>
+
+              <div class="home-indicator"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const dynamicInner = document.getElementById("dynamicInner");
+      const wrapper = document.querySelector(".dynamic-wrapper");
+      const lines = dynamicInner.children;
+      let index = 0;
+      const lineHeight = lines[0].getBoundingClientRect().height;
+      wrapper.style.height = `${lineHeight}px`;
+
+      setInterval(() => {
+        index = (index + 1) % lines.length;
+        dynamicInner.style.transform = `translateY(-${index * lineHeight}px)`;
+      }, 2000);
+    </script>
+  </body>
+</html>

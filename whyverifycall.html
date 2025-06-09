@@ -1,0 +1,3612 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero Section with V-Shape</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background-color: #f8f9fa;
+      }
+
+      /* hero section*/
+      .hero-section {
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          #f6f6f6 0%,
+          #e1ebf8 50%,
+          #cee5ff 100%
+        );
+        color: #1e40af;
+        padding: 80px 20px 120px;
+        overflow: hidden;
+        /* V-shape bottom using clip-path - cuts the section itself */
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-text {
+        max-width: 500px;
+      }
+
+      .solutions-tag {
+        display: inline-block;
+        background-color: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 24px;
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+        color: black;
+        margin-bottom: 32px;
+        line-height: 1.6;
+      }
+
+      .hero-image {
+        position: relative;
+      }
+
+      .phone-mockup {
+        width: 350px;
+        height: 650px;
+        background: linear-gradient(145deg, #1f2937, #374151);
+        border-radius: 35px;
+        padding: 15px;
+        position: relative;
+        margin: 0 auto;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      .phone-screen {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+        border-radius: 25px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .phone-notch {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 25px;
+        background: #1f2937;
+        border-radius: 0 0 15px 15px;
+        z-index: 10;
+      }
+
+      /* FIXED: Large container for the circles */
+      .rotating-icon-container {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* FIXED: Large circles that fill most of the phone screen */
+      .feature-icon {
+        position: absolute;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+        transition: all 0.5s ease-in-out;
+        /* FIXED: Perfect centering */
+        top: 50%;
+        left: 50%;
+      }
+
+      .feature-icon.active {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .feature-icon.call {
+        background: #3b82f6;
+        box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3);
+      }
+
+      .feature-icon.verified {
+        background: #22c55e;
+        box-shadow: 0 15px 40px rgba(34, 197, 94, 0.3);
+      }
+
+      .feature-icon.scam {
+        background: #ef4444;
+        box-shadow: 0 15px 40px rgba(239, 68, 68, 0.3);
+      }
+
+      .feature-icon.history {
+        background: #8b5cf6;
+        box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
+      }
+
+      .feature-icon.trusted {
+        background: #f59e0b;
+        box-shadow: 0 15px 40px rgba(245, 158, 11, 0.3);
+      }
+
+      /* FIXED: Large icons to match the bigger circles */
+      /* .icon-svg {
+        width: 100px;
+        height: 100px;
+        fill: white;
+        margin-bottom: 12px;
+      } */
+
+      .icon-label {
+        color: black;
+        font-size: 30px;
+        font-weight: 600;
+        text-align: center;
+        line-height: 1.2;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .hero-content {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          text-align: center;
+        }
+
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .phone-mockup {
+          width: 280px;
+          height: 520px;
+        }
+
+        .rotating-icon-container {
+          width: 240px;
+          height: 240px;
+        }
+
+        .feature-icon {
+          width: 220px;
+          height: 220px;
+        }
+
+        .icon-svg {
+          width: 80px;
+          height: 80px;
+        }
+
+        .icon-label {
+          font-size: 14px;
+        }
+      }
+
+      /* FIXED FEATURES SECTION - Isolated positioning to prevent conflicts */
+      .features-section {
+        background: none;
+        padding: 80px 20px;
+        color: #374151;
+        position: relative;
+        overflow: hidden;
+        /* Add isolation to prevent z-index conflicts */
+        isolation: isolate;
+      }
+
+      .features-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .features-header {
+        text-align: center;
+        margin-bottom: 60px;
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .features-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        margin-bottom: 24px;
+        line-height: 1.2;
+        color: #1e40af;
+        background: linear-gradient(135deg, #1e40af, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .features-description {
+        font-size: 1.1rem;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+        color: #6b7280;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease-out 0.2s forwards;
+      }
+
+      /* FIXED GRID - Always 4 columns on desktop, responsive scaling */
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-bottom: 40px;
+        /* Ensure grid stays intact */
+        grid-auto-rows: minmax(auto, 1fr);
+      }
+
+      .feature-card {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 20px;
+        padding: 28px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        /* Prevent any positioning conflicts */
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        /* Animation entrance */
+        opacity: 0;
+        transform: translateY(30px);
+        animation: slideInUp 0.6s ease-out forwards;
+      }
+
+      .feature-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .feature-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .feature-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .feature-card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(59, 130, 246, 0.1),
+          transparent
+        );
+        transition: left 0.6s ease-in-out;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        border-color: #3b82f6;
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+      }
+
+      .feature-card:hover::before {
+        left: 100%;
+      }
+
+      .feature-card.active {
+        background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+        border-color: #3b82f6;
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+      }
+
+      /* SMALLER ICON WRAPPER for better fit */
+      .feature-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+        border: 2px solid #e5e7eb;
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover .feature-icon-wrapper {
+        background: linear-gradient(135deg, #3b82f6, #1e40af);
+        border-color: #3b82f6;
+        transform: scale(1.1) rotateY(10deg);
+      }
+
+      .feature-icon-wrapper img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover .feature-icon-wrapper img {
+        filter: brightness(0) invert(1);
+        transform: scale(1.1);
+      }
+
+      /* COMPACT CARD CONTENT */
+      .feature-card-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: #1e40af;
+        transition: color 0.3s ease;
+      }
+
+      .feature-card:hover .feature-card-title {
+        color: #3b82f6;
+      }
+
+      .feature-card-description {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: #6b7280;
+        transition: color 0.3s ease;
+      }
+
+      .feature-card:hover .feature-card-description {
+        color: #4b5563;
+      }
+
+      /* BACKGROUND DECORATIONS - Positioned to not interfere */
+      .features-section::before {
+        content: "";
+        position: absolute;
+        top: 10%;
+        right: -5%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.1),
+          transparent 70%
+        );
+        border-radius: 50%;
+        z-index: 0;
+      }
+
+      .features-section::after {
+        content: "";
+        position: absolute;
+        bottom: 10%;
+        left: -5%;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(
+          circle,
+          rgba(16, 185, 129, 0.1),
+          transparent 70%
+        );
+        border-radius: 50%;
+        z-index: 0;
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* RESPONSIVE DESIGN - Progressive breakdowns */
+      @media (max-width: 1200px) {
+        .features-grid {
+          gap: 20px;
+        }
+
+        .feature-card {
+          padding: 24px 16px;
+        }
+
+        .feature-card-title {
+          font-size: 1rem;
+        }
+
+        .feature-card-description {
+          font-size: 0.8rem;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 24px;
+        }
+
+        .feature-card {
+          padding: 28px 20px;
+        }
+
+        .feature-card-title {
+          font-size: 1.1rem;
+        }
+
+        .feature-card-description {
+          font-size: 0.85rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .features-section {
+          padding: 60px 20px;
+        }
+
+        .features-title {
+          font-size: 2rem;
+          margin-bottom: 20px;
+        }
+
+        .features-description {
+          font-size: 1rem;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .feature-card {
+          padding: 30px 24px;
+        }
+
+        .feature-icon-wrapper {
+          width: 100px;
+          height: 100px;
+        }
+
+        .feature-icon-wrapper img {
+          width: 60px;
+          height: 60px;
+        }
+
+        .feature-card-title {
+          font-size: 1.2rem;
+        }
+
+        .feature-card-description {
+          font-size: 0.9rem;
+        }
+      }
+
+      /* SMALLER SCREENS - Ensure readability */
+      @media (max-width: 480px) {
+        .features-section {
+          padding: 50px 16px;
+        }
+
+        .feature-card {
+          padding: 24px 20px;
+        }
+      }
+
+      /* PREVENT INTERFERENCE WITH OTHER SECTIONS */
+      .features-section * {
+        /* Reset any inherited transforms that might cause conflicts */
+        transform-style: preserve-3d;
+      }
+
+      /* MODAL STYLES - Improved and isolated */
+      .feature-detail-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 9999; /* High z-index to ensure it's on top */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .feature-detail-modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 24px;
+        padding: 40px;
+        max-width: 600px;
+        width: 90%;
+        position: relative;
+        transform: scale(0.8) translateY(50px);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+      }
+
+      .feature-detail-modal.active .modal-content {
+        transform: scale(1) translateY(0);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #f3f4f6;
+        border: none;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        color: #374151;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .modal-close:hover {
+        background: #e5e7eb;
+        transform: rotate(90deg) scale(1.1);
+      }
+
+      .modal-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #1e40af;
+      }
+
+      .modal-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #374151;
+      }
+      /**/
+      .support-section {
+        background: white;
+        padding: 100px 20px;
+        position: relative;
+      }
+
+      .support-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .support-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .support-title {
+        font-size: 2.5rem;
+        font-weight: 630;
+        margin-bottom: 20px;
+        color: #1e40af;
+        line-height: 1.2;
+      }
+
+      .support-description {
+        font-size: 1.1rem;
+        color: #6b7280;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .support-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 24px;
+        margin-top: 50px;
+      }
+
+      .support-card {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 32px 28px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .support-card:hover {
+        transform: translateY(-6px);
+        border-color: #3b82f6;
+        box-shadow: 0 16px 32px rgba(59, 130, 246, 0.12);
+      }
+
+      .support-card.expanded {
+        border-color: #1e40af;
+        background: #f8fafc;
+      }
+
+      .support-card-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .support-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #3b82f6, #1e40af);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .support-icon svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+      }
+
+      .support-card-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #1e40af;
+        margin: 0;
+        line-height: 1.3;
+      }
+
+      .support-card-description {
+        font-size: 1rem;
+        color: #6b7280;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+
+      .support-card-details {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .support-card.expanded .support-card-details {
+        max-height: 200px;
+      }
+
+      .support-details-content {
+        padding-top: 16px;
+        border-top: 1px solid #e5e7eb;
+        margin-top: 16px;
+      }
+
+      .support-features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .support-features li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        color: #374151;
+      }
+
+      .support-features li:before {
+        content: "✓";
+        color: #22c55e;
+        font-weight: bold;
+        font-size: 1rem;
+      }
+
+      .expand-button {
+        background: none;
+        border: none;
+        color: #3b82f6;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 0;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.3s ease;
+      }
+
+      .expand-button:hover {
+        color: #1e40af;
+      }
+
+      .expand-icon {
+        transition: transform 0.3s ease;
+      }
+
+      .support-card.expanded .expand-icon {
+        transform: rotate(180deg);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .support-title {
+          font-size: 2.2rem;
+        }
+
+        .support-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .support-card {
+          padding: 24px 20px;
+        }
+
+        .support-card-header {
+          gap: 12px;
+        }
+
+        .support-icon {
+          width: 40px;
+          height: 40px;
+        }
+
+        .support-icon svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .support-section {
+          padding: 60px 20px;
+        }
+
+        .support-header {
+          margin-bottom: 40px;
+        }
+      }
+      /* testimonial*/
+      .testimonials-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+
+      .section-subtitle {
+        font-size: 1.2rem;
+        color: #666;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .testimonials-container {
+        position: relative;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        min-height: 500px;
+        gap: 2rem;
+        overflow: hidden;
+      }
+
+      .testimonial-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        flex: 0 0 350px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transform: scale(0.9);
+        opacity: 0.6;
+      }
+
+      .testimonial-card.active {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 25px 50px rgba(102, 126, 234, 0.15);
+        border: 2px solid #667eea;
+      }
+
+      .testimonial-card:hover {
+        transform: scale(0.95);
+        opacity: 0.8;
+      }
+
+      .testimonial-card.active:hover {
+        transform: scale(1);
+      }
+
+      .testimonial-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+      }
+
+      .quote-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .testimonial-card.active .quote-icon {
+        transform: scale(1.1);
+      }
+
+      .quote-icon::before {
+        content: '"';
+        font-size: 1.5rem;
+        color: white;
+        font-weight: bold;
+      }
+
+      .testimonial-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 2rem;
+        font-style: italic;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .testimonial-card.active .testimonial-text {
+        color: #333;
+        font-size: 1.2rem;
+      }
+
+      .client-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .client-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+
+      .testimonial-card.active .client-logo {
+        transform: scale(1.1);
+      }
+
+      .client-details h4 {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .client-details p {
+        color: #777;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .testimonial-card.active .client-details h4 {
+        color: #333;
+        font-size: 1.2rem;
+      }
+
+      .testimonial-card.active .client-details p {
+        color: #666;
+        font-size: 1rem;
+      }
+
+      .navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .nav-btn {
+        width: 50px;
+        height: 50px;
+        border: 2px solid #667eea;
+        border-radius: 50%;
+        background: white;
+        color: #667eea;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+      }
+
+      .nav-btn:hover {
+        background: #667eea;
+        color: white;
+        transform: scale(1.1);
+      }
+
+      .nav-btn:active {
+        transform: scale(0.95);
+      }
+
+      .indicators {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ddd;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .indicator.active {
+        background: #667eea;
+        transform: scale(1.2);
+      }
+
+      @media (max-width: 1024px) {
+        .testimonials-container {
+          gap: 1rem;
+        }
+
+        .testimonial-card {
+          flex: 0 0 300px;
+          padding: 1.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .testimonials-container {
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .testimonial-card {
+          flex: none;
+          width: 100%;
+          max-width: 400px;
+          padding: 2rem;
+          transform: scale(1);
+          opacity: 0.3;
+        }
+
+        .testimonial-card.active {
+          opacity: 1;
+          transform: scale(1);
+        }
+
+        .client-info {
+          flex-direction: column;
+          text-align: center;
+          gap: 1rem;
+        }
+
+        .navigation {
+          gap: 1rem;
+        }
+      }
+      .verifycall-section {
+        position: relative;
+        min-height: 70vh;
+        background: linear-gradient(
+          135deg,
+          #0f0f23 0%,
+          #1a1a3e 50%,
+          #2d1b69 100%
+        );
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* Animated Background Orbs */
+      .floating-orbs {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(99, 102, 241, 0.4),
+          rgba(139, 92, 246, 0.2)
+        );
+        filter: blur(1px);
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .orb:nth-child(1) {
+        width: 120px;
+        height: 120px;
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .orb:nth-child(2) {
+        width: 80px;
+        height: 80px;
+        top: 60%;
+        right: 15%;
+        animation-delay: -2s;
+      }
+
+      .orb:nth-child(3) {
+        width: 60px;
+        height: 60px;
+        bottom: 20%;
+        left: 20%;
+        animation-delay: -4s;
+      }
+
+      .orb:nth-child(4) {
+        width: 100px;
+        height: 100px;
+        top: 30%;
+        right: 30%;
+        animation-delay: -1s;
+      }
+
+      .orb:nth-child(5) {
+        width: 40px;
+        height: 40px;
+        bottom: 40%;
+        right: 10%;
+        animation-delay: -3s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) scale(1);
+          opacity: 0.7;
+        }
+        50% {
+          transform: translateY(-20px) scale(1.1);
+          opacity: 1;
+        }
+      }
+
+      /* Geometric Pattern Background */
+      .geometric-pattern {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        background-image: linear-gradient(
+            30deg,
+            transparent 40%,
+            rgba(255, 255, 255, 0.1) 40%,
+            rgba(255, 255, 255, 0.1) 60%,
+            transparent 60%
+          ),
+          linear-gradient(
+            -30deg,
+            transparent 40%,
+            rgba(255, 255, 255, 0.05) 40%,
+            rgba(255, 255, 255, 0.05) 60%,
+            transparent 60%
+          );
+        background-size: 100px 100px;
+        animation: patternMove 20s linear infinite;
+      }
+
+      @keyframes patternMove {
+        0% {
+          transform: translateX(0) translateY(0);
+        }
+        100% {
+          transform: translateX(100px) translateY(100px);
+        }
+      }
+
+      /* Content Container */
+      .container {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px;
+        z-index: 10;
+      }
+
+      /* Animated Tag */
+      .section-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        animation: tagPulse 3s ease-in-out infinite;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .section-tag::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        animation: shimmer 3s infinite;
+      }
+
+      .shield-icon {
+        width: 16px;
+        height: 16px;
+        fill: #10b981;
+        animation: iconBounce 2s ease-in-out infinite;
+      }
+
+      @keyframes tagPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+        }
+      }
+
+      @keyframes shimmer {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      @keyframes iconBounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-3px);
+        }
+        60% {
+          transform: translateY(-2px);
+        }
+      }
+
+      /* Main Heading with Typing Effect */
+      .main-heading {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 650;
+        background: linear-gradient(135deg, #fff 0%, #e2e8f0 50%, #cbd5e1 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 30px;
+        line-height: 1.1;
+        animation: slideInUp 1s ease-out;
+      }
+
+      /* Sub Heading */
+      .sub-heading {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: 50px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.7;
+        animation: slideInUp 1s ease-out 0.3s both;
+        opacity: 0;
+      }
+
+      @keyframes slideInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Enhanced CTA Button */
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: #5e66fe;
+        background-size: 200% 200%;
+        color: #fff;
+        padding: 20px 45px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        animation: slideInUp 1s ease-out 0.6s both;
+        opacity: 0;
+      }
+
+      .cta-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+
+        transition: left 0.5s ease-in-out;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-5px) scale(1.05);
+        background-color: #4a51d4;
+      }
+
+      .cta-button:hover::before {
+        left: 100%;
+      }
+
+      .arrow-icon {
+        width: 20px;
+        height: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      .cta-button:hover .arrow-icon {
+        transform: translateX(5px);
+      }
+
+      @keyframes buttonPulse {
+        0% {
+          transform: translateY(-5px) scale(1.05);
+        }
+        50% {
+          transform: translateY(-5px) scale(1.08);
+        }
+        100% {
+          transform: translateY(-5px) scale(1.05);
+        }
+      }
+
+      /* Floating Elements */
+      .floating-elements {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .float-element {
+        position: absolute;
+        opacity: 0.6;
+        animation: floatRandom 8s ease-in-out infinite;
+      }
+
+      .phone-icon {
+        top: 15%;
+        left: 5%;
+        animation-delay: 0s;
+      }
+
+      .shield-float {
+        top: 70%;
+        right: 8%;
+        animation-delay: -2s;
+      }
+
+      .check-icon {
+        bottom: 25%;
+        left: 8%;
+        animation-delay: -4s;
+      }
+
+      @keyframes floatRandom {
+        0%,
+        100% {
+          transform: translateY(0px) translateX(0px) rotate(0deg);
+          opacity: 0.6;
+        }
+        25% {
+          transform: translateY(-15px) translateX(10px) rotate(5deg);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translateY(-10px) translateX(-5px) rotate(-3deg);
+          opacity: 1;
+        }
+        75% {
+          transform: translateY(-20px) translateX(15px) rotate(8deg);
+          opacity: 0.7;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .verifycall-section {
+          min-height: 80vh;
+          padding: 40px 0;
+        }
+
+        .main-heading {
+          font-size: 2.5rem;
+        }
+
+        .sub-heading {
+          font-size: 1.1rem;
+          margin-bottom: 40px;
+        }
+
+        .cta-button {
+          padding: 18px 35px;
+          font-size: 14px;
+        }
+      }
+      /*features*/
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 80px;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 30px 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      .feature-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 15px;
+      }
+
+      .feature-desc {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 768px) {
+        .verifycall-section {
+          padding: 60px 15px;
+        }
+
+        .main-heading {
+          font-size: 2.5rem;
+        }
+
+        .sub-heading {
+          font-size: 1.1rem;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+          margin-top: 50px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .main-heading {
+          font-size: 2rem;
+        }
+
+        .cta-button {
+          padding: 15px 30px;
+          font-size: 14px;
+        }
+      }
+      /**/
+      .container1 {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 20px;
+      }
+
+      .hero-section1 {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+
+      .hero-title1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        letter-spacing: -0.02em;
+      }
+
+      .main-content1 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+
+      .demo-section1 {
+        position: relative;
+      }
+
+      .features-section1 {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .feature-item1 {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 24px;
+        background: none;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .feature-item1:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .feature-icon1 {
+        width: 24px;
+        height: 24px;
+        background: #e74c3c;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2px;
+      }
+
+      .feature-icon1::after {
+        content: "✓";
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .feature-text1 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #2c3e50;
+        line-height: 1.4;
+      }
+
+      @media (max-width: 768px) {
+        .hero-title1 {
+          font-size: 2.5rem;
+        }
+
+        .main-content1 {
+          grid-template-columns: 1fr;
+          gap: 60px;
+        }
+
+        .container1 {
+          padding: 40px 20px;
+        }
+
+        .feature-text1 {
+          font-size: 16px;
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .feature-item1 {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      .feature-item1:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+
+      .feature-item1:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+
+      .feature-item1:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+      /* footer section*/
+
+      .footer {
+        background-color: #1b1c1d;
+        color: white;
+        padding: 60px 20px 30px;
+      }
+
+      .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: auto;
+        justify-content: space-between;
+      }
+
+      .footer-col {
+        flex: 1 1 200px;
+        margin: 20px;
+      }
+
+      .footer-col h3,
+      .footer-col h4 {
+        margin-bottom: 15px;
+        color: #ffffff;
+      }
+
+      .footer-col p,
+      .footer-col a {
+        color: #bbbbbb;
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+
+      .footer-col a:hover {
+        color: #ffffff;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 0.85rem;
+        color: #999;
+      }
+      .wave-divider {
+        margin-top: -5px;
+        overflow: hidden;
+        line-height: 0;
+      }
+
+      .wave-divider svg {
+        display: block;
+        width: 100%;
+        height: 100px;
+      }
+      .cta-section {
+        text-align: center;
+        padding: 80px 20px 60px;
+      }
+
+      .cta-container h2 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: #111;
+      }
+
+      .cta-container p {
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 25px;
+      }
+
+      .cta-button {
+        background-color: #019f6d;
+        color: white;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        transition: 0.3s ease;
+      }
+
+      .cta-button:hover {
+        background-color: #019f6d;
+      }
+
+      /* Footer Styles (Copied from mm2.html) */
+      .main-footer {
+        background-color: #1f2937; /* Dark background */
+        color: #e5e7eb;
+        padding: 60px 40px;
+        font-size: 0.95em;
+        line-height: 1.6;
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 40px;
+        text-align: left;
+      }
+
+      .footer-column {
+        flex: 1 1 200px; /* Flexible columns */
+        min-width: 180px;
+      }
+
+      .footer-column h3 {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 2px;
+        background-color: #10b981; /* Highlight color */
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        color: #e5e7eb;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-column ul li a:hover {
+        color: #10b981;
+      }
+
+      .footer-info p {
+        margin-bottom: 10px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        color: #e5e7eb;
+        font-size: 1.5em;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: #10b981;
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #374151;
+        margin-top: 40px;
+        padding-top: 20px;
+        text-align: center;
+        color: #9ca3af;
+        font-size: 0.85em;
+      }
+
+      /**/
+      .download-app-btn {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 16px;
+        border: 2px solid black; /* Changed border to black for contrast */
+        border-radius: 50px;
+        background-color: transparent;
+        cursor: pointer;
+        font-family: sans-serif;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.2s ease;
+        margin-left: 3px; /* Adjusted margin to align with text */
+      }
+
+      .download-app-btn:hover {
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2); /* Adjusted hover shadow */
+      }
+
+      .app-text {
+        font-size: 14px;
+        font-weight: 500;
+        color: #000; /* Changed to black for contrast on button */
+        text-align: left;
+      }
+
+      .divider {
+        width: 1px;
+        height: 32px;
+        background-color: black; /* Changed to black for contrast */
+      }
+
+      .os-icons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .os-icon {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #ddd;
+        color: black; /* Changed to black for contrast */
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        font-weight: 600;
+      }
+
+      .os-icon img {
+        width: 22px;
+        height: 22px;
+      }
+      /**/
+      /* Navigation Bar Styles */
+      nav {
+        border-bottom: 1px solid #e5e7eb;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        width: 100%; /* Ensure nav spans full width */
+      }
+
+      nav.scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border-bottom: 1px solid #d1d5db;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 60px;
+        height: 90px;
+        position: relative;
+      }
+
+      .logo {
+        font-weight: 700;
+        font-size: 1.7rem;
+        letter-spacing: 2px;
+        color: #1f2937;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: transform 0.3s ease;
+        text-decoration: none; /* Ensure logo link doesn't have underline */
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+      }
+
+      .logo::before {
+        content: "📞";
+        font-size: 1.5rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px; /* Reduced from 32px as requested */
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nav-links li {
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #374151;
+        font-weight: 500;
+        font-size: 1rem;
+        display: inline-block;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 12px 16px;
+        border-radius: 8px;
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .nav-links li a::before {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 2px;
+        width: 0;
+        background: rgb(70, 70, 253);
+        border-radius: 1px;
+        transition: width 0.3s ease;
+      }
+
+      .nav-links li a:hover::before,
+      .nav-links li a.active::before {
+        width: 100%;
+      }
+
+      .nav-links li a:hover {
+        color: #4744fc;
+        background: rgba(16, 185, 129, 0.05);
+      }
+
+      .nav-links li a.active {
+        color: #4744fc;
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-shrink: 0;
+      }
+
+      .contact-btn {
+        background: rgb(70, 70, 253);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 28px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .contact-btn:hover {
+        background: rgb(65, 65, 230);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      }
+
+      /* Mobile Menu Toggle */
+      .mobile-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+      }
+
+      .mobile-toggle:hover {
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .mobile-toggle span {
+        width: 24px;
+        height: 3px;
+        background: #374151;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        margin: 2px 0;
+      }
+
+      .mobile-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .mobile-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid #e5e7eb;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+      }
+
+      .mobile-menu.active {
+        display: block;
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .mobile-nav-links {
+        list-style: none;
+        padding: 20px 0;
+        margin: 0;
+      }
+
+      .mobile-nav-links li {
+        padding: 0 40px;
+      }
+
+      .mobile-nav-links li a {
+        display: block;
+        padding: 16px 0;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #f3f4f6;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-nav-links li:last-child a {
+        border-bottom: none;
+      }
+
+      .mobile-nav-links li a:hover,
+      .mobile-nav-links li a.active {
+        color: #10b981;
+        padding-left: 16px;
+      }
+
+      .mobile-actions {
+        padding: 20px 40px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .mobile-actions .contact-btn {
+        justify-content: center;
+        width: 100%;
+      }
+
+      /* Notification Badge */
+      .notification-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #ef4444;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+        }
+      }
+
+      /* Enhanced link with badge */
+      .nav-links li.has-notification {
+        position: relative;
+      }
+
+      /* Dropdown styles for Desktop Navigation */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Space between text and icon */
+      }
+
+      .dropdown-icon {
+        font-size: 0.8em;
+        transition: transform 0.3s ease;
+      }
+
+      .dropdown:hover .dropdown-icon {
+        transform: rotate(180deg); /* Rotate icon on hover */
+      }
+
+      .dropdown-menu {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 100%; /* Position below the toggle */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for centering */
+        background-color: white;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        list-style: none;
+        padding: 10px 0;
+        margin: 0;
+        min-width: 180px;
+        z-index: 100; /* Ensure it's above other content */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: block; /* Show on hover */
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(5px); /* Slight slide down effect */
+      }
+
+      .dropdown-menu li a {
+        display: block;
+        padding: 10px 20px;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .dropdown-menu li a:hover {
+        background-color: #f3f4f6;
+        color: #4744fc;
+      }
+
+      /* Adjust mobile menu for dropdown */
+      @media (max-width: 768px) {
+        .mobile-nav-links .dropdown-menu {
+          position: static; /* Remove absolute positioning */
+          box-shadow: none;
+          border-radius: 0;
+          border-top: 1px solid #f3f4f6; /* Add a separator */
+          padding: 0;
+          min-width: unset;
+          opacity: 1; /* Always visible in mobile when parent is active */
+          visibility: visible;
+          transform: none;
+        }
+
+        .mobile-nav-links .dropdown-menu li a {
+          padding-left: 60px; /* Indent dropdown items */
+          border-bottom: none; /* Remove extra border for sub-items */
+          background-color: #f9f9f9; /* Slightly different background for sub-items */
+        }
+
+        .mobile-nav-links .dropdown-toggle {
+          /* This ensures the main "The Company" link in mobile still has its border */
+          border-bottom: 1px solid #f3f4f6;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .nav-container {
+          padding: 0 40px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        /* Navigation specific */
+        .nav-container {
+          padding: 0 30px;
+        }
+        .nav-links {
+          gap: 15px; /* Further reduce gap on smaller screens */
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Navigation specific */
+        .nav-container {
+          height: 80px;
+          padding: 0 20px;
+        }
+
+        .logo {
+          font-size: 1.6rem;
+        }
+
+        .nav-links,
+        .nav-actions {
+          display: none;
+        }
+
+        .mobile-toggle {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <div class="nav-container">
+        <a href="index2.html" class="logo">VERIFYCALL</a>
+
+        <ul class="nav-links">
+          <li>
+            <a href="whyverifycall.html" class="nav-link">Why VerifyCall</a>
+          </li>
+          <li>
+            <a href="howitworks.html" class="nav-link">How It Works</a>
+          </li>
+          <li>
+            <a href="fororganisation.html" class="nav-link"
+              >For Organizations</a
+            >
+          </li>
+          <li class="has-notification">
+            <a href="scam.html" class="nav-link">Scam Alerts</a>
+            <span class="notification-badge">!</span>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle"
+              >The Company <i class="fas fa-chevron-down dropdown-icon"></i
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="theteam.html#team-section">The Team</a></li>
+              <li><a href="contactus.html">FAQs</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="nav-actions">
+          <button
+            class="contact-btn"
+            onclick="window.location.href='contactus.html'"
+          >
+            Contact Us
+          </button>
+        </div>
+
+        <div class="mobile-toggle" id="mobileToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+          <li>
+            <a href="whyverifycall.html" class="mobile-nav-link"
+              >Why VerifyCall</a
+            >
+          </li>
+          <li>
+            <a href="howitworks.html" class="mobile-nav-link">How It Works</a>
+          </li>
+          <li>
+            <a href="fororganisation.html" class="mobile-nav-link"
+              >For Organizations</a
+            >
+          </li>
+          <li>
+            <a href="scam.html" class="mobile-nav-link"
+              >Scam Alerts <span style="color: #ef4444">●</span></a
+            >
+          </li>
+          <li class="dropdown">
+            <a href="#" class="mobile-nav-link dropdown-toggle"
+              >The Company <i class="fas fa-chevron-down dropdown-icon"></i
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="theteam.html">The Team</a></li>
+              <li><a href="contactus.html">FAQs</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="mobile-actions">
+          <button
+            class="contact-btn"
+            onclick="window.location.href='company.html#contact-section'"
+          >
+            <span>💬</span>
+            Contact Us
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!--hero section-->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="solutions-tag">Verified Communication</div>
+          <h1 class="hero-title">Answer with Confidence</h1>
+          <p class="hero-subtitle">
+            Know who's calling — every time. VerifyCall ensures real
+            organizations reach you without the noise of scams or spam.
+          </p>
+          <button class="download-app-btn fade-slide-up fade-delay-3">
+            <span class="app-text">Download<br />The App</span>
+            <span class="divider"></span>
+            <span class="os-icons">
+              <span class="os-icon">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Android_robot.svg"
+                  alt="Android"
+                />
+              </span>
+              <span class="os-icon">iOS</span>
+            </span>
+          </button>
+        </div>
+        <div class="hero-image">
+          <div class="phone-mockup">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="rotating-icon-container">
+                <!-- Call Symbol -->
+                <div class="feature-icon call active" data-feature="call">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                      d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                    />
+                  </svg>
+                  <div class="icon-label">Verified Calls</div>
+                </div>
+
+                <!-- Verified Shield -->
+                <div class="feature-icon verified" data-feature="verified">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                      d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"
+                    />
+                  </svg>
+                  <div class="icon-label">Trust</div>
+                </div>
+
+                <!-- Scam Alerts -->
+                <div class="feature-icon scam" data-feature="scam">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                      d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
+                    />
+                  </svg>
+                  <div class="icon-label">Scam Alerts</div>
+                </div>
+
+                <!-- Call History -->
+                <div class="feature-icon history" data-feature="history">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                      d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"
+                    />
+                  </svg>
+                  <div class="icon-label">Verified Calls</div>
+                </div>
+
+                <!-- Trusted Organizations -->
+                <div class="feature-icon trusted" data-feature="trusted">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                      d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2 1l-3.72 5.6L8.5 11.8c-.28-.4-.72-.8-1.25-.8H2v2h4.5l2 2.8L5.75 21H8l2.25-4 2.25 4H16zm-4-8l2.26-3.4.74 2.4H16v1z"
+                    />
+                  </svg>
+                  <div class="icon-label">Trusted Organisations</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container1">
+        <div class="main-content1">
+          <div class="demo-section1">
+            <img
+              src="Group 5.png"
+              alt="img not found"
+              style="width: 650px; height: auto"
+            />
+          </div>
+
+          <div class="features-section1">
+            <div class="feature-item1">
+              <div class="feature-icon1"></div>
+              <div class="feature-text1">
+                Know who's calling — instantly.
+                <span>
+                  Calls only from verified and trusted organizations.</span
+                >
+              </div>
+            </div>
+
+            <div class="feature-item1">
+              <div class="feature-icon1"></div>
+              <div class="feature-text1">
+                Landline? No problem. Receive verified call alerts for landlines
+                on your mobile.
+              </div>
+            </div>
+
+            <div class="feature-item1">
+              <div class="feature-icon1"></div>
+              <div class="feature-text1">
+                Stay a step ahead of scammers. Access the latest scam alerts
+                before picking up.
+              </div>
+            </div>
+
+            <div class="feature-item1">
+              <div class="feature-icon1"></div>
+              <div class="feature-text1">
+                Every verified call, clearly logged. View a detailed history of
+                verified calls for full transparency.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section HTML -->
+    <section class="features-section">
+      <div class="features-container">
+        <div class="features-header">
+          <h2 class="features-title">
+            Why choose VerifyCall for trusted communication?
+          </h2>
+          <p class="features-description">
+            Not all call verification services are created equal. VerifyCall
+            provides enterprise-grade protection with real-time verification,
+            ensuring you only receive calls from legitimate organizations while
+            blocking scams and spam automatically.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card" data-feature="instant">
+            <div class="feature-icon-wrapper">
+              <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E"
+                alt="Instant Verification"
+              />
+            </div>
+            <h3 class="feature-card-title">Instant Verification</h3>
+            <p class="feature-card-description">
+              Get real-time caller verification before you answer, ensuring
+              legitimate calls reach you instantly.
+            </p>
+          </div>
+
+          <div class="feature-card" data-feature="protection">
+            <div class="feature-icon-wrapper">
+              <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'%3E%3Cpath d='M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z'/%3E%3C/svg%3E"
+                alt="Advanced Protection"
+              />
+            </div>
+            <h3 class="feature-card-title">Advanced Protection</h3>
+            <p class="feature-card-description">
+              Multi-layer spam and scam detection keeps unwanted calls away from
+              your phone automatically.
+            </p>
+          </div>
+
+          <div class="feature-card" data-feature="smart">
+            <div class="feature-icon-wrapper">
+              <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'%3E%3Cpath d='M9,11H7v9a2,2 0 0,0 2,2h6a2,2 0 0,0 2,-2V11H15l-3,-3L9,11M12,2A3,3 0 0,1 15,5A3,3 0 0,1 12,8A3,3 0 0,1 9,5A3,3 0 0,1 12,2Z'/%3E%3C/svg%3E"
+                alt="Smart Recognition"
+              />
+            </div>
+            <h3 class="feature-card-title">Smart Recognition</h3>
+            <p class="feature-card-description">
+              AI-powered caller identification learns your preferences and
+              adapts to your communication needs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal for feature details -->
+    <div class="feature-detail-modal" id="featureModal">
+      <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h3 class="modal-title" id="modalTitle">Feature Title</h3>
+        <p class="modal-description" id="modalDescription">
+          Feature description will appear here.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Feature details data
+      const featureDetails = {
+        instant: {
+          title: "Instant Verification",
+          description:
+            "Our advanced real-time verification system instantly cross-references incoming calls with our comprehensive database of verified organizations. The moment a call comes in, VerifyCall authenticates the caller's identity, displays organization details, and provides you with confidence before you even answer. This split-second verification process ensures you never miss important calls while staying protected from fraudulent attempts.",
+        },
+        protection: {
+          title: "Advanced Protection",
+          description:
+            "Multi-layered defense system combining machine learning algorithms, blacklist databases, and behavioral analysis to identify and block spam, scam, and robocalls. Our protection adapts continuously to new threats, ensuring your phone remains a safe communication channel. Advanced filters learn from global call patterns while respecting your privacy and preferences.",
+        },
+        smart: {
+          title: "Smart Recognition",
+          description:
+            "AI-powered caller identification that learns from your communication patterns and preferences. The system recognizes frequently contacted organizations, adapts to your business hours, and prioritizes calls based on your interaction history. Smart recognition also provides contextual information about why an organization might be calling, helping you make informed decisions about answering.",
+        },
+        analytics: {
+          title: "Detailed Analytics",
+          description:
+            "Comprehensive reporting and insights into your call activity, including detailed logs of verified calls, blocked threats, call patterns, and security insights. Track trends in scam attempts, see which organizations call you most frequently, and get personalized recommendations for optimizing your call protection settings. All data is securely stored and easily exportable for your records.",
+        },
+      };
+
+      // Add click event listeners to feature cards
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          const featureKey = this.getAttribute("data-feature");
+          const feature = featureDetails[featureKey];
+
+          if (feature) {
+            document.getElementById("modalTitle").textContent = feature.title;
+            document.getElementById("modalDescription").textContent =
+              feature.description;
+            document.getElementById("featureModal").classList.add("active");
+          }
+
+          // Remove active class from all cards and add to clicked card
+          document
+            .querySelectorAll(".feature-card")
+            .forEach((c) => c.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+
+      // Close modal function
+      function closeModal() {
+        document.getElementById("featureModal").classList.remove("active");
+        document
+          .querySelectorAll(".feature-card")
+          .forEach((c) => c.classList.remove("active"));
+      }
+
+      // Close modal when clicking outside
+      document
+        .getElementById("featureModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeModal();
+          }
+        });
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+
+      // Intersection Observer for scroll animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.animationPlayState = "running";
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      // Observe all animated elements
+      document
+        .querySelectorAll(".feature-card, .features-description")
+        .forEach((el) => {
+          observer.observe(el);
+        });
+    </script>
+
+    <section class="verifycall-section">
+      <!-- Animated Background Elements -->
+      <div class="floating-orbs">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+      </div>
+
+      <div class="geometric-pattern"></div>
+
+      <!-- Floating Icons -->
+      <div class="floating-elements">
+        <div class="float-element phone-icon">
+          <svg
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            fill="rgba(16, 185, 129, 0.6)"
+          >
+            <path
+              d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+            />
+          </svg>
+        </div>
+        <div class="float-element shield-float">
+          <svg
+            width="35"
+            height="35"
+            viewBox="0 0 24 24"
+            fill="rgba(6, 214, 160, 0.6)"
+          >
+            <path
+              d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"
+            />
+          </svg>
+        </div>
+        <div class="float-element check-icon">
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="rgba(0, 245, 255, 0.6)"
+          >
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="section-tag">
+          <svg class="shield-icon" viewBox="0 0 24 24">
+            <path
+              d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"
+            />
+          </svg>
+          Trusted Call Protection
+        </div>
+
+        <h1 class="main-heading">
+          Protect Every Call — Trust Every Connection
+        </h1>
+
+        <p class="sub-heading">
+          VerifyCall instantly identifies registered organizations when they
+          call you, provides real-time scam alerts, and keeps you informed with
+          verified call history and trusted organization details.
+        </p>
+
+        <a href="#" class="cta-button">
+          Get Protected Now
+          <svg class="arrow-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Support Services Section HTML -->
+    <section class="support-section">
+      <div class="support-container">
+        <div class="support-header">
+          <h2 class="support-title">Complete Protection at Every Step</h2>
+          <p class="support-description">
+            Our comprehensive call verification services provide expert
+            protection and advanced features, helping you maintain secure
+            communication and peace of mind in every interaction.
+          </p>
+        </div>
+
+        <div class="support-grid">
+          <!-- Real-time Verification -->
+          <div class="support-card" data-card="verification">
+            <div class="support-card-header">
+              <div class="support-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L19 9l-9 8z"
+                  />
+                </svg>
+              </div>
+              <h3 class="support-card-title">Real-time Verification</h3>
+            </div>
+            <p class="support-card-description">
+              Instant caller identification and verification system that
+              validates legitimate organizations before your phone rings.
+            </p>
+            <button class="expand-button" data-expand="verification">
+              Learn more <span class="expand-icon">▼</span>
+            </button>
+            <div class="support-card-details">
+              <div class="support-details-content">
+                <ul class="support-features">
+                  <li>Lightning-fast caller lookup in milliseconds</li>
+                  <li>Cross-reference with verified business databases</li>
+                  <li>Real-time reputation scoring system</li>
+                  <li>Instant notification of verification status</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spam & Scam Protection -->
+          <div class="support-card" data-card="protection">
+            <div class="support-card-header">
+              <div class="support-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
+                </svg>
+              </div>
+              <h3 class="support-card-title">
+                Advanced Spam & Scam Protection
+              </h3>
+            </div>
+            <p class="support-card-description">
+              Multi-layered protection system with AI-powered detection to block
+              unwanted calls and protect against fraud attempts.
+            </p>
+            <button class="expand-button" data-expand="protection">
+              Learn more <span class="expand-icon">▼</span>
+            </button>
+            <div class="support-card-details">
+              <div class="support-details-content">
+                <ul class="support-features">
+                  <li>AI-powered scam pattern recognition</li>
+                  <li>Community-driven threat intelligence</li>
+                  <li>Automatic robocall blocking</li>
+                  <li>Customizable protection levels</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Smart Call Management -->
+          <div class="support-card" data-card="management">
+            <div class="support-card-header">
+              <div class="support-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </div>
+              <h3 class="support-card-title">Smart Call Management</h3>
+            </div>
+            <p class="support-card-description">
+              Intelligent call handling with personalized preferences and
+              adaptive learning for your communication patterns.
+            </p>
+            <button class="expand-button" data-expand="management">
+              Learn more <span class="expand-icon">▼</span>
+            </button>
+            <div class="support-card-details">
+              <div class="support-details-content">
+                <ul class="support-features">
+                  <li>Personalized call filtering rules</li>
+                  <li>VIP contact priority handling</li>
+                  <li>Time-based call management</li>
+                  <li>Smart notification preferences</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Call Analytics & Insights -->
+          <div class="support-card" data-card="analytics">
+            <div class="support-card-header">
+              <div class="support-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+                  />
+                </svg>
+              </div>
+              <h3 class="support-card-title">Call Analytics & Insights</h3>
+            </div>
+            <p class="support-card-description">
+              Comprehensive reporting and analytics dashboard to track call
+              patterns, blocked threats, and communication trends.
+            </p>
+            <button class="expand-button" data-expand="analytics">
+              Learn more <span class="expand-icon">▼</span>
+            </button>
+            <div class="support-card-details">
+              <div class="support-details-content">
+                <ul class="support-features">
+                  <li>Detailed call history and trends</li>
+                  <li>Threat blocking effectiveness reports</li>
+                  <li>Peak communication time analysis</li>
+                  <li>Monthly security summary reports</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 24/7 Support & Monitoring -->
+          <div class="support-card" data-card="support">
+            <div class="support-card-header">
+              <div class="support-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5-5h-4V4h4v4z"
+                  />
+                </svg>
+              </div>
+              <h3 class="support-card-title">24/7 Support & Monitoring</h3>
+            </div>
+            <p class="support-card-description">
+              Round-the-clock system monitoring and customer support to ensure
+              uninterrupted protection and quick issue resolution.
+            </p>
+            <button class="expand-button" data-expand="support">
+              Learn more <span class="expand-icon">▼</span>
+            </button>
+            <div class="support-card-details">
+              <div class="support-details-content">
+                <ul class="support-features">
+                  <li>24/7 system uptime monitoring</li>
+                  <li>Instant customer support chat</li>
+                  <li>Proactive threat detection alerts</li>
+                  <li>Regular system updates and improvements</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enterprise Integration -->
+          <div class="support-card" data-card="integration">
+            <div class="support-card-header">
+              <div class="support-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
+                </svg>
+              </div>
+              <h3 class="support-card-title">Enterprise Integration</h3>
+            </div>
+            <p class="support-card-description">
+              Seamless integration with business systems and enterprise-grade
+              features for organizations of all sizes.
+            </p>
+            <button class="expand-button" data-expand="integration">
+              Learn more <span class="expand-icon">▼</span>
+            </button>
+            <div class="support-card-details">
+              <div class="support-details-content">
+                <ul class="support-features">
+                  <li>API integration for existing systems</li>
+                  <li>Bulk user management and deployment</li>
+                  <li>Custom enterprise policy settings</li>
+                  <li>Advanced compliance and audit tools</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials-section">
+      <div class="section-header">
+        <h2 class="section-title">Trusted by Industry Leaders</h2>
+        <p class="section-subtitle">
+          See what top organizations are saying about our solutions and
+          partnership
+        </p>
+      </div>
+
+      <div class="testimonials-container">
+        <div class="testimonial-card active" data-testimonial="0">
+          <div class="quote-icon"></div>
+          <p class="testimonial-text">
+            "VerifyCall's expertise in services and relationships across the
+            ecosystem has enabled us to implement a highly successful card
+            program. Their integrations with issuing banks and networks have
+            been instrumental in helping us establish our program."
+          </p>
+          <div class="client-info">
+            <div
+              class="client-logo"
+              style="background: linear-gradient(135deg, #ff6b6b, #ee5a24)"
+            >
+              BLOCK
+            </div>
+            <div class="client-details">
+              <h4>Christina Riechers</h4>
+              <p>General Manager of Business Banking, Block</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-testimonial="1">
+          <div class="quote-icon"></div>
+          <p class="testimonial-text">
+            "The innovative approach and seamless integration capabilities have
+            transformed our infrastructure. Their commitment to security and
+            compliance has exceeded our expectations, enabling us to scale
+            rapidly while maintaining the highest standards."
+          </p>
+          <div class="client-info">
+            <div
+              class="client-logo"
+              style="background: linear-gradient(135deg, #4834d4, #686de0)"
+            >
+              STRIPE
+            </div>
+            <div class="client-details">
+              <h4>Sarah Johnson</h4>
+              <p>VP of Product Development, Stripe</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-testimonial="2">
+          <div class="quote-icon"></div>
+          <p class="testimonial-text">
+            "Working with this team has been exceptional. Their deep
+            understanding of regulations and ability to navigate complex
+            compliance requirements has been crucial to our success in multiple
+            markets."
+          </p>
+          <div class="client-info">
+            <div
+              class="client-logo"
+              style="background: linear-gradient(135deg, #00d2d3, #54a0ff)"
+            >
+              PLAID
+            </div>
+            <div class="client-details">
+              <h4>Michael Chen</h4>
+              <p>Head of Partnerships, Plaid</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation">
+        <button class="nav-btn" id="prevBtn">‹</button>
+        <div class="indicators">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
+        </div>
+        <button class="nav-btn" id="nextBtn">›</button>
+      </div>
+    </section>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-column footer-info">
+          <h3>VerifyCall</h3>
+          <p>Building trust and security in every call.</p>
+          <p>Email: info@verifycall.com</p>
+          <p>Phone: +1 (800) 123-4567</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html#why">Why VerifyCall</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#organizations">For Organizations</a></li>
+            <li><a href="scam-alerts.html#latest-alerts">Scam Alerts</a></li>
+            <li><a href="#team-section">The Company</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="scam.html">Report a Scam</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Whitepapers</a></li>
+            <li><a href="#">Press & Media</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 VerifyCall. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- <div class="wave-divider">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path
+          d="M0,32L80,42.7C160,53,320,75,480,74.7C640,75,800,53,960,42.7C1120,32,1280,32,1360,32L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+          fill="#1b1c1d"
+        ></path>
+      </svg>
+    </div> -->
+
+    <!-- <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h3>VerifyCall</h3>
+          <p>Verified calls. Trusted communication. No more scams.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#">How it Works</a></li>
+            <li><a href="#">Scam Alerts</a></li>
+            <li><a href="#">Enterprise List</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <ul>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> VerifyCall. All rights reserved.</p>
+      </div>
+    </footer> -->
+
+    <script>
+      class TestimonialSlider {
+        constructor() {
+          this.currentSlide = 0;
+          this.testimonials = document.querySelectorAll(".testimonial-card");
+          this.indicators = document.querySelectorAll(".indicator");
+          this.prevBtn = document.getElementById("prevBtn");
+          this.nextBtn = document.getElementById("nextBtn");
+          this.totalSlides = this.testimonials.length;
+          this.autoPlayInterval = null;
+
+          this.init();
+        }
+
+        init() {
+          this.setupEventListeners();
+          this.startAutoPlay();
+        }
+
+        setupEventListeners() {
+          // Navigation buttons
+          this.prevBtn.addEventListener("click", () => this.prevSlide());
+          this.nextBtn.addEventListener("click", () => this.nextSlide());
+
+          // Indicators
+          this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener("click", () => this.goToSlide(index));
+          });
+
+          // Testimonial card clicks
+          this.testimonials.forEach((card, index) => {
+            card.addEventListener("click", () => this.goToSlide(index));
+          });
+
+          // Pause auto-play on hover
+          const container = document.querySelector(".testimonials-container");
+          container.addEventListener("mouseenter", () => this.pauseAutoPlay());
+          container.addEventListener("mouseleave", () => this.startAutoPlay());
+
+          // Touch/swipe support for mobile
+          let startX = 0;
+          let startY = 0;
+
+          container.addEventListener(
+            "touchstart",
+            (e) => {
+              startX = e.touches[0].clientX;
+              startY = e.touches[0].clientY;
+            },
+            { passive: true }
+          );
+
+          container.addEventListener(
+            "touchend",
+            (e) => {
+              const endX = e.changedTouches[0].clientX;
+              const endY = e.changedTouches[0].clientY;
+              this.handleSwipe(startX, startY, endX, endY);
+            },
+            { passive: true }
+          );
+
+          // Keyboard navigation
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") this.prevSlide();
+            if (e.key === "ArrowRight") this.nextSlide();
+          });
+        }
+
+        handleSwipe(startX, startY, endX, endY) {
+          const deltaX = endX - startX;
+          const deltaY = endY - startY;
+
+          // Only handle horizontal swipes
+          if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+            if (deltaX > 0) {
+              this.prevSlide();
+            } else {
+              this.nextSlide();
+            }
+          }
+        }
+
+        goToSlide(index) {
+          // Remove active class from current slide
+          this.testimonials[this.currentSlide].classList.remove("active");
+          this.indicators[this.currentSlide].classList.remove("active");
+
+          // Update current slide
+          this.currentSlide = index;
+
+          // Add active class to new slide
+          this.testimonials[this.currentSlide].classList.add("active");
+          this.indicators[this.currentSlide].classList.add("active");
+
+          // Reset auto-play
+          this.startAutoPlay();
+        }
+
+        nextSlide() {
+          const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+          this.goToSlide(nextIndex);
+        }
+
+        prevSlide() {
+          const prevIndex =
+            (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+          this.goToSlide(prevIndex);
+        }
+
+        startAutoPlay() {
+          this.pauseAutoPlay();
+          this.autoPlayInterval = setInterval(() => {
+            this.nextSlide();
+          }, 5000); // Change slide every 5 seconds
+        }
+
+        pauseAutoPlay() {
+          if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+            this.autoPlayInterval = null;
+          }
+        }
+      }
+
+      // Initialize the slider when DOM is loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        new TestimonialSlider();
+      });
+
+      // Add smooth scrolling and intersection observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe stats section
+      document.addEventListener("DOMContentLoaded", () => {
+        const stats = document.querySelector(".testimonial-stats");
+        if (stats) {
+          observer.observe(stats);
+        }
+      });
+    </script>
+
+    <script>
+      // Support section expandable cards functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const expandButtons = document.querySelectorAll(".expand-button");
+
+        expandButtons.forEach((button) => {
+          button.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const cardId = this.getAttribute("data-expand");
+            const card = document.querySelector(`[data-card="${cardId}"]`);
+
+            // Close all other cards
+            const allCards = document.querySelectorAll(".support-card");
+            allCards.forEach((otherCard) => {
+              if (otherCard !== card) {
+                otherCard.classList.remove("expanded");
+              }
+            });
+
+            // Toggle current card
+            card.classList.toggle("expanded");
+
+            // Update button text
+            const isExpanded = card.classList.contains("expanded");
+            this.innerHTML = isExpanded
+              ? 'Show less <span class="expand-icon">▼</span>'
+              : 'Learn more <span class="expand-icon">▼</span>';
+          });
+        });
+
+        // Optional: Close cards when clicking outside
+        document.addEventListener("click", function (e) {
+          if (!e.target.closest(".support-card")) {
+            const allCards = document.querySelectorAll(".support-card");
+            const allButtons = document.querySelectorAll(".expand-button");
+
+            allCards.forEach((card) => {
+              card.classList.remove("expanded");
+            });
+
+            allButtons.forEach((button) => {
+              button.innerHTML =
+                'Learn more <span class="expand-icon">▼</span>';
+            });
+          }
+        });
+      });
+    </script>
+
+    <script>
+      // Rotating icons functionality
+      const features = ["call", "verified", "scam", "history", "trusted"];
+      let currentFeatureIndex = 0;
+
+      function rotateFeatures() {
+        // Hide current active feature
+        const currentActive = document.querySelector(".feature-icon.active");
+        if (currentActive) {
+          currentActive.classList.remove("active");
+        }
+
+        // Move to next feature
+        currentFeatureIndex = (currentFeatureIndex + 1) % features.length;
+
+        // Show next feature
+        const nextFeature = document.querySelector(
+          `[data-feature="${features[currentFeatureIndex]}"]`
+        );
+        if (nextFeature) {
+          nextFeature.classList.add("active");
+        }
+      }
+
+      // Start the rotation after page load
+      setTimeout(() => {
+        setInterval(rotateFeatures, 3000); // Change every 3 seconds
+      }, 2000); // Wait 2 seconds before starting rotation
+    </script>
+
+    <script>
+      // Add entrance animations
+      document.addEventListener("DOMContentLoaded", function () {
+        const elements = document.querySelectorAll(
+          ".main-heading, .sub-heading, .cta-button"
+        );
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.animationPlayState = "running";
+            }
+          });
+        });
+
+        elements.forEach((el) => observer.observe(el));
+
+        // Add mouse movement parallax effect
+        document.addEventListener("mousemove", (e) => {
+          const orbs = document.querySelectorAll(".orb");
+          const floatingElements = document.querySelectorAll(".float-element");
+
+          const x = e.clientX / window.innerWidth;
+          const y = e.clientY / window.innerHeight;
+
+          orbs.forEach((orb, index) => {
+            const speed = (index + 1) * 0.5;
+            const xMove = (x - 0.5) * speed * 20;
+            const yMove = (y - 0.5) * speed * 20;
+
+            orb.style.transform = `translate(${xMove}px, ${yMove}px)`;
+          });
+
+          floatingElements.forEach((el, index) => {
+            const speed = (index + 1) * 0.3;
+            const xMove = (x - 0.5) * speed * 15;
+            const yMove = (y - 0.5) * speed * 15;
+
+            el.style.transform += ` translate(${xMove}px, ${yMove}px)`;
+          });
+        });
+
+        // Add scroll-triggered animations
+        const scrollElements = document.querySelectorAll(
+          ".section-tag, .main-heading, .sub-heading, .cta-button"
+        );
+
+        const scrollObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("animate-in");
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        scrollElements.forEach((el) => scrollObserver.observe(el));
+      });
+    </script>
+    <script>
+      const navbar = document.getElementById("navbar");
+      const mobileToggle = document.getElementById("mobileToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const navLinks = document.querySelectorAll(".nav-link");
+      const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+      // Scroll effect for navbar
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile menu toggle
+      mobileToggle.addEventListener("click", () => {
+        mobileToggle.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!navbar.contains(e.target) && !mobileToggle.contains(e.target)) {
+          mobileToggle.classList.remove("active");
+          mobileMenu.classList.remove("active");
+        }
+      });
+
+      // Active link functionality for desktop
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          navLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Smooth scroll to section if it's an internal link (starts with #)
+          const targetId = link.getAttribute("href");
+          if (targetId && targetId.startsWith("#")) {
+            e.preventDefault(); // Prevent default only for internal hash links
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      // Active link functionality for mobile
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          mobileNavLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Close mobile menu
+          mobileToggle.classList.remove("active");
+          mobileMenu.classList.remove("active");
+
+          // Smooth scroll to section if it's an internal link (starts with #)
+          const targetId = link.getAttribute("href");
+          if (targetId && targetId.startsWith("#")) {
+            e.preventDefault(); // Prevent default only for internal hash links
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      // Set active link based on current page
+      const currentPage = window.location.pathname.split("/").pop(); // Get just the filename
+
+      // Function to set active class based on current page
+      function setActiveLink() {
+        navLinks.forEach((link) => {
+          const linkHref = link.getAttribute("href");
+          if (linkHref && linkHref.includes(currentPage)) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        mobileNavLinks.forEach((link) => {
+          const linkHref = link.getAttribute("href");
+          if (linkHref && linkHref.includes(currentPage)) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        // Handle active class for "The Company" dropdown specifically
+        const companyDropdownToggle = document.querySelector(
+          ".nav-links .dropdown .dropdown-toggle"
+        );
+        const mobileCompanyDropdownToggle = document.querySelector(
+          ".mobile-nav-links .dropdown .dropdown-toggle"
+        );
+
+        if (currentPage.includes("company.html")) {
+          if (companyDropdownToggle)
+            companyDropdownToggle.classList.add("active");
+          if (mobileCompanyDropdownToggle)
+            mobileCompanyDropdownToggle.classList.add("active");
+        } else {
+          if (companyDropdownToggle)
+            companyDropdownToggle.classList.remove("active");
+          if (mobileCompanyDropdownToggle)
+            mobileCompanyDropdownToggle.classList.remove("active");
+        }
+      }
+
+      // Call setActiveLink on page load
+      setActiveLink();
+
+      // Potentially re-call setActiveLink on hash change for same-page navigation
+      window.addEventListener("hashchange", setActiveLink);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scam Alerts - VerifyCall</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /* Global Box-sizing */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      /* Base Body Styles */
+      body {
+        font-family: "IBM Plex Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: white; /* Consistent background color */
+
+        min-height: 100vh;
+        padding-top: 0; /* No initial padding */
+        box-sizing: border-box;
+        overflow-x: hidden; /* Prevent horizontal scroll from particles */
+      }
+
+      /* Reusable Section Heading and Description */
+      .section-heading {
+        font-size: 2.5em;
+        color: #1a004b;
+        margin-bottom: 20px;
+        font-weight: 600;
+        /* text-align: center; */ /* Removed for left alignment */
+      }
+
+      .section-description {
+        font-size: 1.1em;
+        color: #555;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto 50px auto;
+        text-align: center;
+      }
+
+      /* Reusable Button Styles */
+      .btn {
+        padding: 14px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        font-size: 1.05em;
+        min-width: 180px;
+        text-align: center;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background-color: #4348f3;
+        color: #ffffff;
+        border: 2px solid #4988f4;
+      }
+
+      .btn-primary:hover {
+        background-color: #395cf8;
+        border-color: #1b1bef;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background-color: #f0f0f0;
+        color: #333;
+        border: 2px solid #ddd;
+      }
+
+      .btn-secondary:hover {
+        background-color: #e0e0e0;
+        transform: translateY(-2px);
+      }
+
+      /* Scam Alerts Hero Section */
+      .scam-hero-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 80px 60px; /* Ample padding for spacing */
+        background-color: white; /* Light background for contrast */
+        max-width: 1400px; /* Matches navbar and main content width */
+        margin: 0 auto; /* Center the section */
+        flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+        gap: 40px; /* Space between content and image */
+        text-align: left; /* Default text alignment */
+        width: 100%; /* Ensure it takes full width of its parent */
+      }
+
+      .scam-hero-content {
+        flex: 1;
+        min-width: 300px; /* Ensure content doesn't get too narrow */
+        max-width: 600px; /* Limit content width for readability */
+      }
+
+      .scam-hero-content h1 {
+        font-size: 3.5em; /* Large, impactful heading */
+        color: #1a004b; /* Deep purple/blue from your existing design */
+        margin-bottom: 25px;
+        font-weight: 700;
+        line-height: 1.15;
+      }
+
+      .scam-hero-content p {
+        font-size: 1.2em;
+        color: #555;
+        line-height: 1.7;
+        margin-bottom: 40px;
+      }
+
+      .scam-hero-buttons {
+        display: flex;
+        gap: 20px; /* Space between buttons */
+        flex-wrap: wrap; /* Allow buttons to wrap */
+      }
+
+      .scam-hero-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 300px; /* Ensure image container doesn't get too small */
+        max-width: 600px; /* Max width for the image */
+      }
+
+      .scam-hero-image img {
+        max-width: 100%;
+        height: auto;
+        display: block; /* Remove extra space below image */
+        border-radius: 12px; /* Slight rounded corners */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      }
+
+      /* Latest Scam Alerts Section */
+      .latest-alerts-section {
+        padding: 80px 60px;
+        background-color: white;
+        max-width: 1350px;
+        margin: 0 auto;
+        width: 100%;
+        text-align: left; /* Changed to left */
+      }
+
+      .alerts-grid {
+        display: flex; /* Use flexbox for vertical stacking */
+        flex-direction: column;
+        gap: 80px; /* Increased spacing between alert cards */
+        margin-top: 80px;
+        align-items: center; /* Center items if they don't take full width */
+      }
+
+      .alert-card {
+        /* background-color: #fff; */ /* Removed background box */
+        border-radius: 12px;
+        padding: 0; /* Removed padding for background box */
+        /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); */ /* Removed background box */
+        text-align: left;
+        display: flex;
+        gap: 30px; /* Space between image and content */
+        /* transition: transform 0.3s ease, box-shadow 0.3s ease; */ /* Removed hover effect */
+        /* border: 1px solid #eee; */ /* Removed background box */
+        max-width: 1300px; /* Max width for each alert card, similar to blog post card width */
+        width: 100%; /* Ensure it takes available width up to max-width */
+      }
+
+      /* Removed .alert-card:hover rule */
+
+      .alert-card-image {
+        flex-shrink: 0; /* Prevent image from shrinking */
+        width: 300px; /* Fixed width for the image container, adjust as needed */
+        height: 230px; /* Fixed height for the image container */
+        background-color: #f0f0f0; /* Placeholder background */
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .alert-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Cover the area, cropping if necessary */
+        display: block;
+      }
+
+      .alert-card-content {
+        flex-grow: 1; /* Allow content to take remaining space */
+      }
+
+      .alert-meta {
+        font-size: 0.9em;
+        font-weight: 500;
+        color: #10b981; /* Green color from your nav link hover */
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .alert-meta .alert-type {
+        font-weight: 600;
+        color: #ef4444; /* Red for alerts */
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .alert-meta .alert-date {
+        color: #777; /* Softer color for date */
+      }
+      .alert-title {
+        font-size: 1.5em;
+        font-weight: 700;
+        color: #1a004b;
+        margin-bottom: 15px;
+        line-height: 1.3;
+      }
+
+      .alert-description {
+        font-size: 1em;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        flex-grow: 1; /* Allow description to take available space */
+      }
+
+      .read-more-btn {
+        display: inline-block;
+        margin-top: 0; /* No top margin as it's part of the flow */
+        color: #4348f3;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .read-more-btn:hover {
+        color: #395cf8;
+        text-decoration: underline;
+      }
+
+      /* How to Identify Scams Section */
+      .how-to-identify-section {
+        padding: 80px 60px;
+        background-color: white;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+      }
+
+      .identification-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .identification-card {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #eee;
+      }
+
+      .identification-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .identification-icon {
+        font-size: 3em;
+        color: #ef4444; /* Red for warning */
+        margin-bottom: 20px;
+      }
+
+      .identification-title {
+        font-size: 1.4em;
+        font-weight: 700;
+        color: #1a004b;
+        margin-bottom: 15px;
+      }
+
+      .identification-description {
+        font-size: 0.95em;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      /* Report a Scam Section */
+      .report-scam-section {
+        padding: 80px 60px;
+        background-color: white;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+      }
+
+      .report-form-container {
+        max-width: 700px;
+        margin: 50px auto 0 auto;
+        background-color: #f8f8f8;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        text-align: left;
+      }
+
+      .report-form-container label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+        font-size: 1.05em;
+      }
+
+      .report-form-container input[type="text"],
+      .report-form-container input[type="email"],
+      .report-form-container textarea {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 25px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 1em;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .report-form-container input[type="text"]:focus,
+      .report-form-container input[type="email"]:focus,
+      .report-form-container textarea:focus {
+        border-color: #4348f3;
+        box-shadow: 0 0 0 3px rgba(67, 72, 243, 0.2);
+        outline: none;
+      }
+
+      .report-form-container textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .report-form-container button {
+        width: 100%;
+        padding: 15px;
+        background-color: #4348f3;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .report-form-container button:hover {
+        background-color: #395cf8;
+        transform: translateY(-2px);
+      }
+
+      /* FAQs Section */
+      .faqs-section {
+        padding: 80px 60px;
+        background-color: white;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+      }
+
+      .faq-list {
+        max-width: 900px;
+        margin: 50px auto 0 auto;
+      }
+
+      .faq-item {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 25px;
+        font-size: 1.15em;
+        font-weight: 600;
+        color: #1a004b;
+        cursor: pointer;
+        background-color: #fcfcfc;
+        border-bottom: 1px solid #eee;
+        transition: background-color 0.3s ease;
+      }
+
+      .faq-question:hover {
+        background-color: #f3f3f3;
+      }
+
+      .faq-question i {
+        transition: transform 0.3s ease;
+      }
+
+      .faq-question.active i {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        padding: 0 25px;
+        font-size: 1em;
+        color: #555;
+        line-height: 1.6;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+      }
+
+      .faq-answer.active {
+        max-height: 200px; /* Adjust based on max content height */
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
+      /* Footer Styles (Adapted from mm2.html structure) */
+      .main-footer {
+        background-color: #1f2937; /* Dark background */
+        color: #e5e7eb;
+        padding: 60px 40px;
+        font-size: 0.95em;
+        line-height: 1.6;
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 40px;
+        text-align: left;
+      }
+
+      .footer-column {
+        flex: 1 1 200px; /* Flexible columns */
+        min-width: 180px;
+      }
+
+      .footer-column h3 {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 2px;
+        background-color: #10b981; /* Highlight color */
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        color: #e5e7eb;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-column ul li a:hover {
+        color: #10b981;
+      }
+
+      .footer-info p {
+        margin-bottom: 10px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        color: #e5e7eb;
+        font-size: 1.5em;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: #10b981;
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #374151;
+        margin-top: 40px;
+        padding-top: 20px;
+        text-align: center;
+        color: #9ca3af;
+        font-size: 0.85em;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .scam-hero-section,
+        .latest-alerts-section,
+        .how-to-identify-section,
+        .report-scam-section,
+        .faqs-section {
+          padding: 80px 40px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        /* Navigation specific */
+
+        /* Hero section specific */
+        .scam-hero-section {
+          flex-direction: column;
+          text-align: center;
+          padding: 60px 40px;
+        }
+
+        .scam-hero-content {
+          max-width: 700px;
+          margin-bottom: 40px;
+        }
+
+        .scam-hero-content h1 {
+          font-size: 2.8em;
+        }
+
+        .scam-hero-content p {
+          font-size: 1.1em;
+        }
+
+        .scam-hero-buttons {
+          justify-content: center;
+        }
+
+        .scam-hero-image {
+          max-width: 500px;
+        }
+
+        /* Other sections */
+        .latest-alerts-section,
+        .how-to-identify-section,
+        .report-scam-section,
+        .faqs-section {
+          padding: 60px 30px;
+        }
+        .section-heading {
+          font-size: 2.2em;
+        }
+        .section-description {
+          font-size: 1em;
+        }
+
+        .footer-container {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 30px;
+        }
+        .footer-column h3::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .social-links {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Navigation specific */
+
+        .logo {
+          font-size: 1.6rem;
+        }
+
+        .mobile-toggle {
+          display: flex;
+        }
+
+        /* Hero section specific */
+        .scam-hero-section {
+          padding: 50px 30px;
+        }
+        .scam-hero-content h1 {
+          font-size: 2.2em;
+          margin-bottom: 20px;
+        }
+        .scam-hero-content p {
+          font-size: 1em;
+          margin-bottom: 30px;
+        }
+        .scam-hero-buttons {
+          flex-direction: column;
+          gap: 15px;
+        }
+        .scam-hero-buttons .btn {
+          width: 100%;
+          max-width: 300px;
+          margin: 0 auto;
+        }
+        .scam-hero-image {
+          max-width: 400px;
+        }
+
+        /* Other sections */
+        .latest-alerts-section,
+        .how-to-identify-section,
+        .report-scam-section,
+        .faqs-section {
+          padding: 50px 20px;
+        }
+        .alerts-grid {
+          gap: 20px;
+        }
+        .alert-card {
+          flex-direction: column; /* Stack image and content vertically on small screens */
+          max-width: 90%;
+          margin: 0 auto;
+          text-align: center;
+          gap: 20px;
+          padding: 25px;
+        }
+        .alert-card-image {
+          width: 100%;
+          height: 200px; /* Adjust height for stacked image */
+        }
+        .alert-card-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .alert-meta {
+          flex-direction: column;
+          gap: 5px;
+        }
+        .section-heading {
+          font-size: 2em;
+        }
+        .report-form-container {
+          padding: 30px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .scam-hero-section,
+        .latest-alerts-section,
+        .how-to-identify-section,
+        .report-scam-section,
+        .faqs-section {
+          padding: 40px 15px;
+        }
+        .scam-hero-content h1 {
+          font-size: 1.8em;
+        }
+        .scam-hero-content p {
+          font-size: 0.9em;
+        }
+        .scam-hero-image {
+          max-width: 300px;
+        }
+        .section-heading {
+          font-size: 1.8em;
+        }
+        .alert-card,
+        .identification-card {
+          padding: 20px;
+        }
+        .alert-title {
+          font-size: 1.3em;
+        }
+        .identification-title {
+          font-size: 1.2em;
+        }
+        .report-form-container {
+          padding: 20px;
+        }
+      }
+      /**/
+      /* Navigation Bar Styles */
+      nav {
+        border-bottom: 1px solid #e5e7eb;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        width: 100%; /* Ensure nav spans full width */
+      }
+
+      nav.scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border-bottom: 1px solid #d1d5db;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 60px;
+        height: 90px;
+        position: relative;
+      }
+
+      .logo {
+        font-weight: 700;
+        font-size: 1.7rem;
+        letter-spacing: 2px;
+        color: #1f2937;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: transform 0.3s ease;
+        text-decoration: none; /* Ensure logo link doesn't have underline */
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+      }
+
+      .logo::before {
+        content: "📞";
+        font-size: 1.5rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px; /* Reduced from 32px as requested */
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nav-links li {
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #374151;
+        font-weight: 500;
+        font-size: 1rem;
+        display: inline-block;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 12px 16px;
+        border-radius: 8px;
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .nav-links li a::before {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 2px;
+        width: 0;
+        background: rgb(70, 70, 253);
+        border-radius: 1px;
+        transition: width 0.3s ease;
+      }
+
+      .nav-links li a:hover::before,
+      .nav-links li a.active::before {
+        width: 100%;
+      }
+
+      .nav-links li a:hover {
+        color: #4744fc;
+        background: rgba(16, 185, 129, 0.05);
+      }
+
+      .nav-links li a.active {
+        color: #4744fc;
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-shrink: 0;
+      }
+
+      .contact-btn {
+        background: rgb(70, 70, 253);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 28px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .contact-btn:hover {
+        background: rgb(65, 65, 230);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      }
+
+      /* Mobile Menu Toggle */
+      .mobile-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+      }
+
+      .mobile-toggle:hover {
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .mobile-toggle span {
+        width: 24px;
+        height: 3px;
+        background: #374151;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        margin: 2px 0;
+      }
+
+      .mobile-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .mobile-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid #e5e7eb;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+      }
+
+      .mobile-menu.active {
+        display: block;
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .mobile-nav-links {
+        list-style: none;
+        padding: 20px 0;
+        margin: 0;
+      }
+
+      .mobile-nav-links li {
+        padding: 0 40px;
+      }
+
+      .mobile-nav-links li a {
+        display: block;
+        padding: 16px 0;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #f3f4f6;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-nav-links li:last-child a {
+        border-bottom: none;
+      }
+
+      .mobile-nav-links li a:hover,
+      .mobile-nav-links li a.active {
+        color: #10b981;
+        padding-left: 16px;
+      }
+
+      .mobile-actions {
+        padding: 20px 40px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .mobile-actions .contact-btn {
+        justify-content: center;
+        width: 100%;
+      }
+
+      /* Notification Badge */
+      .notification-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #ef4444;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+        }
+      }
+
+      /* Enhanced link with badge */
+      .nav-links li.has-notification {
+        position: relative;
+      }
+
+      /* Dropdown styles for Desktop Navigation */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Space between text and icon */
+      }
+
+      .dropdown-icon {
+        font-size: 0.8em;
+        transition: transform 0.3s ease;
+      }
+
+      .dropdown:hover .dropdown-icon {
+        transform: rotate(180deg); /* Rotate icon on hover */
+      }
+
+      .dropdown-menu {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 100%; /* Position below the toggle */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for centering */
+        background-color: white;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        list-style: none;
+        padding: 10px 0;
+        margin: 0;
+        min-width: 180px;
+        z-index: 100; /* Ensure it's above other content */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: block; /* Show on hover */
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(5px); /* Slight slide down effect */
+      }
+
+      .dropdown-menu li a {
+        display: block;
+        padding: 10px 20px;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .dropdown-menu li a:hover {
+        background-color: #f3f4f6;
+        color: #4744fc;
+      }
+
+      /* Adjust mobile menu for dropdown */
+      @media (max-width: 768px) {
+        .mobile-nav-links .dropdown-menu {
+          position: static; /* Remove absolute positioning */
+          box-shadow: none;
+          border-radius: 0;
+          border-top: 1px solid #f3f4f6; /* Add a separator */
+          padding: 0;
+          min-width: unset;
+          opacity: 1; /* Always visible in mobile when parent is active */
+          visibility: visible;
+          transform: none;
+        }
+
+        .mobile-nav-links .dropdown-menu li a {
+          padding-left: 60px; /* Indent dropdown items */
+          border-bottom: none; /* Remove extra border for sub-items */
+          background-color: #f9f9f9; /* Slightly different background for sub-items */
+        }
+
+        .mobile-nav-links .dropdown-toggle {
+          /* This ensures the main "The Company" link in mobile still has its border */
+          border-bottom: 1px solid #f3f4f6;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .nav-container {
+          padding: 0 40px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        /* Navigation specific */
+        .nav-container {
+          padding: 0 30px;
+        }
+        .nav-links {
+          gap: 15px; /* Further reduce gap on smaller screens */
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Navigation specific */
+        .nav-container {
+          height: 80px;
+          padding: 0 20px;
+        }
+
+        .logo {
+          font-size: 1.6rem;
+        }
+
+        .nav-links,
+        .nav-actions {
+          display: none;
+        }
+
+        .mobile-toggle {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <div class="nav-container">
+        <a href="index2.html" class="logo">VERIFYCALL</a>
+
+        <ul class="nav-links">
+          <li>
+            <a href="whyverifycall.html" class="nav-link">Why VerifyCall</a>
+          </li>
+          <li>
+            <a href="howitworks.html" class="nav-link">How It Works</a>
+          </li>
+          <li>
+            <a href="fororganisation.html" class="nav-link"
+              >For Organizations</a
+            >
+          </li>
+          <li class="has-notification">
+            <a href="scam.html" class="nav-link">Scam Alerts</a>
+            <span class="notification-badge">!</span>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle"
+              >The Company <i class="fas fa-chevron-down dropdown-icon"></i
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="theteam.html#team-section">The Team</a></li>
+              <li><a href="contactus.html">FAQs</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="nav-actions">
+          <button
+            class="contact-btn"
+            onclick="window.location.href='contactus.html'"
+          >
+            Contact Us
+          </button>
+        </div>
+
+        <div class="mobile-toggle" id="mobileToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+          <li>
+            <a href="whyverifycall.html" class="mobile-nav-link"
+              >Why VerifyCall</a
+            >
+          </li>
+          <li>
+            <a href="howitworks.html" class="mobile-nav-link">How It Works</a>
+          </li>
+          <li>
+            <a href="fororganisation.html" class="mobile-nav-link"
+              >For Organizations</a
+            >
+          </li>
+          <li>
+            <a href="scam.html" class="mobile-nav-link"
+              >Scam Alerts <span style="color: #ef4444">●</span></a
+            >
+          </li>
+          <li class="dropdown">
+            <a href="#" class="mobile-nav-link dropdown-toggle"
+              >The Company <i class="fas fa-chevron-down dropdown-icon"></i
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="theteam.html">The Team</a></li>
+              <li><a href="contactus.html">FAQs</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="mobile-actions">
+          <button
+            class="contact-btn"
+            onclick="window.location.href='company.html#contact-section'"
+          >
+            <span>💬</span>
+            Contact Us
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <section class="scam-hero-section">
+      <div class="scam-hero-content">
+        <h1>Stay Ahead of Scams:<br />Real-time Alerts, Real Protection.</h1>
+        <p>
+          Verifycall's Scam Alerts keep you informed about the latest fraudulent
+          activities, phishing attempts, and impersonation schemes targeting
+          individuals and organizations. Empower yourself with knowledge to
+          identify and avoid threats.
+        </p>
+        <div class="scam-hero-buttons">
+          <a href="#latest-alerts" class="btn btn-primary"
+            >Explore Latest Alerts</a
+          >
+          <a href="#report-scam" class="btn btn-secondary">Report a Scam</a>
+        </div>
+      </div>
+      <div class="scam-hero-image">
+        <img src="scamhero.png" alt="Scam Protection Shield" />
+      </div>
+    </section>
+
+    <section id="latest-alerts" class="latest-alerts-section">
+      <h2 class="section-heading">Latest Scam Alerts</h2>
+      <div class="alerts-grid">
+        <div class="alert-card">
+          <div class="alert-card-image">
+            <img src="phishingscam.jpg" alt="Phishing Email Alert" />
+          </div>
+          <div class="alert-card-content">
+            <div class="alert-meta">
+              <span class="alert-type"
+                ><i class="fas fa-exclamation-triangle"></i> Phishing
+                Email</span
+              >
+              <span class="alert-date">May 25, 2025</span>
+            </div>
+            <h3 class="alert-title">Urgent Account Suspension Notice</h3>
+            <p class="alert-description">
+              Scammers are sending fake emails pretending to be from banks or
+              online services, claiming your account will be suspended if you
+              don't click a link and verify your details.
+            </p>
+            <a href="#" class="read-more-btn"
+              >Read More <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="alert-card">
+          <div class="alert-card-image">
+            <img src="impersonation_call.jpg" alt="Impersonation Call Alert" />
+          </div>
+          <div class="alert-card-content">
+            <div class="alert-meta">
+              <span class="alert-type"
+                ><i class="fas fa-phone-slash"></i> Impersonation Call</span
+              >
+              <span class="alert-date">May 23, 2025</span>
+            </div>
+            <h3 class="alert-title">"Government Official" Demanding Payment</h3>
+            <p class="alert-description">
+              Beware of calls from individuals claiming to be from government
+              agencies (IRS, police, etc.) demanding immediate payment or
+              personal information via gift cards or wire transfers.
+            </p>
+            <a href="#" class="read-more-btn"
+              >Read More <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="alert-card">
+          <div class="alert-card-image">
+            <img src="sms_scam.jpg" alt="SMS Scam Alert" />
+          </div>
+          <div class="alert-card-content">
+            <div class="alert-meta">
+              <span class="alert-type"
+                ><i class="fas fa-sms"></i> Smishing (SMS Scam)</span
+              >
+              <span class="alert-date">May 20, 2025</span>
+            </div>
+            <h3 class="alert-title">Fake Delivery Notification SMS</h3>
+            <p class="alert-description">
+              Messages pretending to be from delivery services with a link to
+              track a package. Clicking the link often leads to malware or a
+              phishing site.
+            </p>
+            <a href="#" class="read-more-btn"
+              >Read More <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="alert-card">
+          <div class="alert-card-image">
+            <img src="tech_support_scam.jpg" alt="Tech Support Scam Alert" />
+          </div>
+          <div class="alert-card-content">
+            <div class="alert-meta">
+              <span class="alert-type"
+                ><i class="fas fa-laptop-code"></i> Tech Support Scam</span
+              >
+              <span class="alert-date">May 18, 2025</span>
+            </div>
+            <h3 class="alert-title">
+              Pop-up Warning: "Your Computer is Infected"
+            </h3>
+            <p class="alert-description">
+              Malicious pop-up warnings or unsolicited calls claiming your
+              computer has a virus, leading you to grant remote access or
+              purchase unnecessary software.
+            </p>
+            <a href="#" class="read-more-btn"
+              >Read More <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-to-identify-section">
+      <h2 class="section-heading">How to Identify Common Scams</h2>
+      <p class="section-description">
+        Learn the red flags and key indicators that can help you spot a scam
+        before it's too late. Your vigilance is your best defense.
+      </p>
+
+      <div class="identification-grid">
+        <div class="identification-card">
+          <i class="fas fa-hourglass-half identification-icon"></i>
+          <h3 class="identification-title">Urgency & Pressure</h3>
+          <p class="identification-description">
+            Scammers often create a sense of urgency, pressuring you to act
+            immediately without thinking or consulting others.
+          </p>
+        </div>
+        <div class="identification-card">
+          <i class="fas fa-dollar-sign identification-icon"></i>
+          <h3 class="identification-title">Unusual Payment Methods</h3>
+          <p class="identification-description">
+            Requests for payment via gift cards, wire transfers, or
+            cryptocurrency are common scam tactics, as they are untraceable.
+          </p>
+        </div>
+        <div class="identification-card">
+          <i class="fas fa-link identification-icon"></i>
+          <h3 class="identification-title">Suspicious Links/Attachments</h3>
+          <p class="identification-description">
+            Be wary of links or attachments in unexpected emails or messages.
+            They can lead to phishing sites or malware downloads.
+          </p>
+        </div>
+        <div class="identification-card">
+          <i class="fas fa-user-secret identification-icon"></i>
+          <h3 class="identification-title">Unsolicited Contact</h3>
+          <p class="identification-description">
+            If you didn't initiate contact, be suspicious. Verify the caller's
+            identity through official channels, not information they provide.
+          </p>
+        </div>
+        <div class="identification-card">
+          <i class="fas fa-grammar identification-icon"></i>
+          <h3 class="identification-title">Poor Grammar/Spelling</h3>
+          <p class="identification-description">
+            Many scam communications contain noticeable grammatical errors or
+            spelling mistakes, a sign of unprofessionalism and fraud.
+          </p>
+        </div>
+        <div class="identification-card">
+          <i class="fas fa-lock-open identification-icon"></i>
+          <h3 class="identification-title">Requests for Personal Info</h3>
+          <p class="identification-description">
+            Legitimate organizations rarely ask for sensitive personal or
+            financial information over the phone or via unsecure email.
+          </p>
+        </div>
+        <div class="identification-card">
+          <i class="fas fa-dollar-sign identification-icon"></i>
+          <h3 class="identification-title">Unusual Payment Methods</h3>
+          <p class="identification-description">
+            Requests for payment via gift cards, wire transfers, or
+            cryptocurrency are common scam tactics, as they are untraceable.
+          </p>
+        </div>
+        <div class="identification-card">
+          <i class="fas fa-hourglass-half identification-icon"></i>
+          <h3 class="identification-title">Urgency & Pressure</h3>
+          <p class="identification-description">
+            Scammers often create a sense of urgency, pressuring you to act
+            immediately without thinking or consulting others.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="report-scam" class="report-scam-section">
+      <h2 class="section-heading">Report a Scam</h2>
+      <p class="section-description">
+        Help us combat fraud by reporting any suspicious calls, messages, or
+        activities you encounter. Your report can protect others.
+      </p>
+
+      <div class="report-form-container">
+        <form action="#" method="POST">
+          <label for="name">Your Name (Optional)</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+          />
+
+          <label for="email">Your Email (Optional)</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email address"
+          />
+
+          <label for="scam-type">Type of Scam</label>
+          <input
+            type="text"
+            id="scam-type"
+            name="scam-type"
+            placeholder="e.g., Phishing Call, SMS Scam, Online Fraud"
+          />
+
+          <label for="scam-details"
+            >Scam Details (Please be as descriptive as possible)</label
+          >
+          <textarea
+            id="scam-details"
+            name="scam-details"
+            placeholder="Describe the scam, including phone numbers, links, names used, and what they asked for."
+          ></textarea>
+
+          <button type="submit">Submit Report</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="faqs-section">
+      <h2 class="section-heading">Frequently Asked Questions</h2>
+      <p class="section-description">
+        Find answers to common questions about scams, how VerifyCall helps, and
+        what to do if you've been targeted.
+      </p>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What is a scam call?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>
+              A scam call is an unsolicited phone call made by fraudsters
+              attempting to deceive you into giving them money, personal
+              information, or access to your computer. They often impersonate
+              legitimate organizations like banks, government agencies, or tech
+              support.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How does VerifyCall protect me from scams?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>
+              VerifyCall allows legitimate organizations to register and verify
+              their caller ID, displaying a "Verified" badge or unique
+              information on your screen when they call. This helps you
+              instantly recognize genuine calls and differentiate them from
+              fraudulent ones.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What should I do if I receive a suspicious call?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>
+              If you receive a suspicious call, do not give out any personal
+              information or money. Hang up immediately. You can then try to
+              verify the call by contacting the organization directly using a
+              known official phone number (not one provided by the caller).
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Can I report a scam to VerifyCall?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Yes, we encourage you to report any scams you encounter using our
+              "Report a Scam" section on this page. Your reports help us track
+              new tactics and share information with our community to prevent
+              others from falling victim.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-column footer-info">
+          <h3>VerifyCall</h3>
+          <p>Building trust and security in every call.</p>
+          <p>Email: info@verifycall.com</p>
+          <p>Phone: +1 (800) 123-4567</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html#why">Why VerifyCall</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#organizations">For Organizations</a></li>
+            <li><a href="#latest-alerts">Scam Alerts</a></li>
+            <li><a href="index.html#company">The Company</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="#report-scam">Report a Scam</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Whitepapers</a></li>
+            <li><a href="#">Press & Media</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 VerifyCall. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+
+
+        // **FAQ Accordion functionality - MOVED HERE**
+        // This ensures the FAQ script runs ONLY after the DOM is fully loaded and includes the FAQ elements.
+        document.querySelectorAll(".faq-question").forEach((item) => {
+          item.addEventListener("click", (event) => {
+            const faqItem = item.closest(".faq-item");
+            const answer = faqItem.querySelector(".faq-answer");
+            const icon = item.querySelector("i");
+
+            // Toggle active class on the question and answer
+            item.classList.toggle("active");
+            answer.classList.toggle("active");
+
+            // Toggle icon rotation
+            icon.classList.toggle("active");
+
+            // Close other open FAQs
+            document.querySelectorAll(".faq-item").forEach((otherItem) => {
+              if (otherItem !== faqItem) {
+                otherItem
+                  .querySelector(".faq-question")
+                  .classList.remove("active");
+                otherItem
+                  .querySelector(".faq-answer")
+                  .classList.remove("active");
+                otherItem
+                  .querySelector(".faq-question i")
+                  .classList.remove("active");
+              }
+            });
+          });
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching navigation:", error);
+      });
+    </script>
+
+    <script>
+      const navbar = document.getElementById("navbar");
+      const mobileToggle = document.getElementById("mobileToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const navLinks = document.querySelectorAll(".nav-link");
+      const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+      // Scroll effect for navbar
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile menu toggle
+      mobileToggle.addEventListener("click", () => {
+        mobileToggle.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!navbar.contains(e.target) && !mobileToggle.contains(e.target)) {
+          mobileToggle.classList.remove("active");
+          mobileMenu.classList.remove("active");
+        }
+      });
+
+      // Active link functionality for desktop
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          navLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Smooth scroll to section if it's an internal link (starts with #)
+          const targetId = link.getAttribute("href");
+          if (targetId && targetId.startsWith("#")) {
+            e.preventDefault(); // Prevent default only for internal hash links
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      // Active link functionality for mobile
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          mobileNavLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Close mobile menu
+          mobileToggle.classList.remove("active");
+          mobileMenu.classList.remove("active");
+
+          // Smooth scroll to section if it's an internal link (starts with #)
+          const targetId = link.getAttribute("href");
+          if (targetId && targetId.startsWith("#")) {
+            e.preventDefault(); // Prevent default only for internal hash links
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      // Set active link based on current page
+      const currentPage = window.location.pathname.split("/").pop(); // Get just the filename
+
+      // Function to set active class based on current page
+      function setActiveLink() {
+        navLinks.forEach((link) => {
+          const linkHref = link.getAttribute("href");
+          if (linkHref && linkHref.includes(currentPage)) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        mobileNavLinks.forEach((link) => {
+          const linkHref = link.getAttribute("href");
+          if (linkHref && linkHref.includes(currentPage)) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        // Handle active class for "The Company" dropdown specifically
+        const companyDropdownToggle = document.querySelector(
+          ".nav-links .dropdown .dropdown-toggle"
+        );
+        const mobileCompanyDropdownToggle = document.querySelector(
+          ".mobile-nav-links .dropdown .dropdown-toggle"
+        );
+
+        if (currentPage.includes("company.html")) {
+          if (companyDropdownToggle)
+            companyDropdownToggle.classList.add("active");
+          if (mobileCompanyDropdownToggle)
+            mobileCompanyDropdownToggle.classList.add("active");
+        } else {
+          if (companyDropdownToggle)
+            companyDropdownToggle.classList.remove("active");
+          if (mobileCompanyDropdownToggle)
+            mobileCompanyDropdownToggle.classList.remove("active");
+        }
+      }
+
+      // Call setActiveLink on page load
+      setActiveLink();
+
+      // Potentially re-call setActiveLink on hash change for same-page navigation
+      window.addEventListener("hashchange", setActiveLink);
+    </script>
+  </body>
+</html>

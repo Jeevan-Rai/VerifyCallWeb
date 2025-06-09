@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - VerifyCall</title>
+    <link rel="stylesheet" href="contact-style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* General Body & Reset */
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #f4f7f6; /* Light background */
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header & Navigation */
+      header {
+        background-color: #ffffff;
+        padding: 15px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .logo {
+        font-size: 1.8em;
+        font-weight: 600;
+        color: #007bff; /* VerifyCall primary blue */
+      }
+
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      nav ul li {
+        margin-left: 30px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #555;
+        font-weight: 400;
+        transition: color 0.3s ease;
+      }
+
+      nav ul li a:hover,
+      nav ul li a.active {
+        color: #007bff; /* VerifyCall primary blue */
+      }
+
+      /* Hero Section */
+      #contact-hero {
+        background: linear-gradient(
+          to right,
+          #007bff,
+          #0056b3
+        ); /* Blue gradient */
+        color: white;
+        text-align: center;
+        padding: 80px 20px;
+        margin-bottom: 40px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+
+      #contact-hero h1 {
+        font-size: 3em;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      #contact-hero p {
+        font-size: 1.2em;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.9;
+      }
+
+      /* Contact Details Section */
+      #contact-details-section .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      .contact-card {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .contact-card .icon {
+        font-size: 2.5em;
+        color: #007bff;
+        margin-bottom: 15px;
+      }
+
+      .contact-card h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .contact-card p {
+        font-size: 0.95em;
+        color: #666;
+        margin-bottom: 8px;
+      }
+
+      .contact-card a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.05em;
+        transition: color 0.3s ease;
+      }
+
+      .contact-card a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+      }
+
+      /* Contact Form & Map Section */
+      #contact-form-section {
+        margin-bottom: 60px;
+      }
+
+      #contact-form-section h2,
+      .map-container h2,
+      #social-media-section h2 {
+        text-align: center;
+        font-size: 2.2em;
+        margin-bottom: 40px;
+        color: #333;
+      }
+
+      .form-map-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      @media (min-width: 768px) {
+        .form-map-grid {
+          grid-template-columns: 1fr 1fr; /* Two columns on larger screens */
+        }
+      }
+
+      .contact-form-container,
+      .map-container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .contact-form-container form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #444;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1em;
+        color: #333;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box; /* Include padding in width */
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        outline: none;
+      }
+
+      .form-group textarea {
+        resize: vertical; /* Allow vertical resizing */
+        min-height: 120px;
+      }
+
+      .submit-button {
+        background-color: #007bff;
+        color: white;
+        padding: 15px 25px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        align-self: flex-start; /* Align button to the left */
+      }
+
+      .submit-button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+      }
+
+      .error-message {
+        color: #dc3545; /* Red for errors */
+        font-size: 0.85em;
+        margin-top: 5px;
+        display: none; /* Hidden by default, shown by JS */
+      }
+
+      .form-status {
+        margin-top: 20px;
+        padding: 10px 15px;
+        border-radius: 6px;
+        font-weight: 500;
+        display: none; /* Hidden by default */
+      }
+
+      .form-status.success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .form-status.error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      /* Map Container */
+      .map-container iframe {
+        width: 100%;
+        height: 400px; /* Adjust map height as needed */
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+
+      .map-note {
+        text-align: center;
+        font-size: 0.9em;
+        color: #888;
+        margin-top: 15px;
+      }
+
+      /* Social Media Section */
+      #social-media-section {
+        text-align: center;
+        background-color: #eaf3ff; /* Light blue background */
+        padding: 60px 20px;
+        border-radius: 10px;
+        margin-bottom: 60px;
+      }
+
+      .social-icons {
+        margin-top: 30px;
+        margin-bottom: 25px;
+      }
+
+      .social-icons a {
+        color: #007bff;
+        font-size: 2.5em;
+        margin: 0 15px;
+        transition: color 0.3s ease, transform 0.2s ease;
+      }
+
+      .social-icons a:hover {
+        color: #0056b3;
+        transform: scale(1.1);
+      }
+
+      #social-media-section p {
+        font-size: 1.1em;
+        color: #555;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #333;
+        color: #eee;
+        padding: 30px 0;
+        text-align: center;
+        font-size: 0.9em;
+      }
+
+      footer .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-links a {
+        color: #eee;
+        text-decoration: none;
+        margin: 0 15px;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #007bff;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        #contact-hero h1 {
+          font-size: 2.2em;
+        }
+
+        #contact-hero p {
+          font-size: 1em;
+        }
+
+        .contact-card {
+          padding: 25px;
+        }
+
+        .contact-card h3 {
+          font-size: 1.3em;
+        }
+
+        .contact-form-container,
+        .map-container {
+          padding: 30px;
+        }
+
+        #contact-form-section h2,
+        .map-container h2,
+        #social-media-section h2 {
+          font-size: 1.8em;
+        }
+
+        .submit-button {
+          width: 100%;
+        }
+
+        nav ul {
+          flex-direction: column;
+          align-items: center;
+          margin-top: 15px;
+        }
+
+        nav ul li {
+          margin: 10px 0;
+        }
+
+        nav {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #contact-hero {
+          padding: 60px 15px;
+        }
+
+        .contact-card {
+          padding: 20px;
+        }
+
+        .contact-card .icon {
+          font-size: 2em;
+        }
+
+        .contact-form-container,
+        .map-container {
+          padding: 20px;
+        }
+
+        .social-icons a {
+          font-size: 2em;
+          margin: 0 10px;
+        }
+
+        footer .footer-links {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <header>
+      <nav>
+        <div class="logo">VerifyCall</div>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/features">Features</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact" class="active">Contact Us</a></li>
+        </ul>
+      </nav>
+    </header> -->
+
+    <main>
+      <section id="contact-hero">
+        <div class="hero-content">
+          <h1>Get in Touch with VerifyCall</h1>
+          <p>
+            Have questions, feedback, or need support? We're here to help you
+            get the most out of VerifyCall.
+          </p>
+        </div>
+      </section>
+
+      <section id="contact-details-section">
+        <div class="container">
+          <div class="contact-card">
+            <i class="fas fa-envelope icon"></i>
+            <h3>Email Us</h3>
+            <p>For general inquiries or support.</p>
+            <a href="mailto:support@verifycall.com">support@adroitx.com</a>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-phone-alt icon"></i>
+            <h3>Call Us</h3>
+            <p>Monday - Friday, 9 AM - 5 PM IST</p>
+            <a href="tel:+9180XXXXX123">+91 80 XXXXX 123</a>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-map-marker-alt icon"></i>
+            <h3>Visit Us</h3>
+            <p>VerifyCall Technologies Pvt. Ltd.</p>
+            <p>123 Innovation Drive, Tech City, UK - 570001</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact-form-section">
+        <div class="container form-map-grid">
+          <div class="contact-form-container">
+            <h2>Send Us a Message</h2>
+            <form id="contactForm" action="#" method="POST">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="John Doe"
+                />
+                <div class="error-message" id="name-error"></div>
+              </div>
+              <div class="form-group">
+                <label for="email">Your Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="john.doe@example.com"
+                />
+                <div class="error-message" id="email-error"></div>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  required
+                  placeholder="Question about features"
+                />
+                <div class="error-message" id="subject-error"></div>
+              </div>
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  required
+                  placeholder="Type your message here..."
+                ></textarea>
+                <div class="error-message" id="message-error"></div>
+              </div>
+              <button type="submit" class="submit-button">Send Message</button>
+              <div class="form-status" id="form-status"></div>
+            </form>
+          </div>
+
+          <div class="map-container">
+            <h2>Our Location</h2>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.00518042456!2d77.5855423148216!3d12.97159879084883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae167d60ed0139%3A0x7d01e1d0d9f4c39f!2sBangalore%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1678901234567!5m2!1sen!2sin"
+              width="100%"
+              height="450"
+              style="border: 0; border-radius: 8px"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </div>
+        </div>
+      </section>
+
+      <section id="social-media-section">
+        <div class="container">
+          <h2>Connect With Us</h2>
+          <div class="social-icons">
+            <a
+              href="https://twitter.com/verifycall"
+              target="_blank"
+              aria-label="VerifyCall on Twitter"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a
+              href="https://linkedin.com/company/verifycall"
+              target="_blank"
+              aria-label="VerifyCall on LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a
+              href="https://facebook.com/verifycall"
+              target="_blank"
+              aria-label="VerifyCall on Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a
+              href="https://instagram.com/verifycall"
+              target="_blank"
+              aria-label="VerifyCall on Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+          <p>
+            Follow us on social media for the latest updates, tips, and news.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 VerifyCall. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-of-service">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="contact-script.js"></script>
+  </body>
+</html>

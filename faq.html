@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <style>
+      /* Basic Reset & Font (Optional, adjust as per your website's global styles) */
+      body {
+        font-family: "Arial", sans-serif; /* Or your preferred font */
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* FAQ Container */
+      .faq-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .faq-container h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 2.2em;
+      }
+
+      /* FAQ Item */
+      .faq-item {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        overflow: hidden; /* Important for animation */
+      }
+
+      /* FAQ Question Button */
+      .faq-question {
+        background-color: #ffffff;
+        color: #333;
+        padding: 18px 25px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .faq-question:hover,
+      .faq-question.active {
+        background-color: #e2f0fd; /* Light blue hover/active state */
+        color: #007bff; /* Primary blue for VerifyCall branding */
+      }
+
+      .faq-question h3 {
+        margin: 0;
+        font-size: 1.1em;
+      }
+
+      .faq-icon {
+        font-size: 1.5em;
+        position: relative; /* For positioning pseudo-elements */
+        width: 1em; /* Give it a defined width/height if needed */
+        height: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease; /* For rotation animation */
+      }
+
+      .faq-question.active .faq-icon {
+        transform: rotate(45deg); /* Rotate plus to cross */
+      }
+
+      /* FAQ Answer */
+      .faq-answer {
+        padding: 0 25px;
+        background-color: #fefefe;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Smooth transition */
+      }
+
+      .faq-answer p {
+        margin: 0;
+        padding-bottom: 18px; /* Padding for the text within the answer */
+        line-height: 1.6;
+        color: #555;
+      }
+
+      /* When active, show the answer */
+      .faq-item.active .faq-answer {
+        max-height: 200px; /* Adjust as needed, make it large enough to fit content */
+        padding-top: 15px; /* Add top padding when open */
+      }
+
+      /* Call to Action */
+      .faq-cta {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 1.1em;
+        color: #666;
+      }
+
+      .faq-cta a {
+        color: #007bff; /* VerifyCall primary color */
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .faq-cta a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .faq-container {
+          margin: 30px 15px;
+          padding: 15px;
+        }
+
+        .faq-question {
+          padding: 15px 20px;
+          font-size: 1em;
+        }
+
+        .faq-question h3 {
+          font-size: 1em;
+        }
+
+        .faq-answer {
+          padding: 0 20px;
+        }
+
+        .faq-answer p {
+          padding-bottom: 15px;
+        }
+      }
+
+      /* Footer Styles (Copied from mm2.html) */
+      .main-footer {
+        background-color: #1f2937; /* Dark background */
+        color: #e5e7eb;
+        padding: 60px 40px;
+        font-size: 0.95em;
+        line-height: 1.6;
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 40px;
+        text-align: left;
+      }
+
+      .footer-column {
+        flex: 1 1 200px; /* Flexible columns */
+        min-width: 180px;
+      }
+
+      .footer-column h3 {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 2px;
+        background-color: #10b981; /* Highlight color */
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        color: #e5e7eb;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-column ul li a:hover {
+        color: #10b981;
+      }
+
+      .footer-info p {
+        margin-bottom: 10px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        color: #e5e7eb;
+        font-size: 1.5em;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: #10b981;
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #374151;
+        margin-top: 40px;
+        padding-top: 20px;
+        text-align: center;
+        color: #9ca3af;
+        font-size: 0.85em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <section id="faq-section" class="faq-container">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3>How does VerifyCall protect me from spam calls?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            VerifyCall uses a multi-layered approach to identify and block spam,
+            scam, and unwanted calls. We leverage a constantly updated database
+            of known spam numbers, real-time call analysis, and user-reported
+            data to provide comprehensive protection. When an incoming call
+            matches our spam criteria, we can automatically block it or alert
+            you so you can decide whether to answer.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3>Is VerifyCall available for both Android and iOS?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Yes, VerifyCall is designed to work seamlessly on both Android and
+            iOS devices. You can download our app from the Google Play Store or
+            the Apple App Store, respectively. We ensure a consistent user
+            experience across both platforms while adhering to their specific
+            security and privacy guidelines.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3>Do I need an internet connection for VerifyCall to work?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            While an internet connection is required for initial setup, database
+            updates, and some advanced features (like real-time caller ID
+            lookup), VerifyCall's core call blocking functionality can operate
+            offline. This ensures you're protected even when you don't have an
+            active data connection.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <h3>How accurate is VerifyCall's caller identification?</h3>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            VerifyCall strives for the highest accuracy in caller
+            identification. We combine official data sources, crowd-sourced
+            information, and advanced algorithms to provide reliable caller ID.
+            While no system is 100% perfect, our continuous updates and
+            community feedback loops help us maintain a very high level of
+            accuracy.
+          </p>
+        </div>
+      </div>
+
+      <!-- <div class="faq-item">
+        <button class="class="faq-question">
+            <h3>What if a legitimate call is accidentally blocked?</h3>
+            <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <p>VerifyCall provides options to manage blocked calls. You can easily review a list of blocked calls and unblock any number that was mistakenly identified as spam. You can also whitelist important contacts to ensure they are never blocked. Our goal is to empower you with control over your call experience.</p>
+        </div>
+    </div> -->
+
+      <div class="faq-cta">
+        <p>
+          Still have questions?
+          <a href="contactus.html">Contact our support team</a>
+        </p>
+      </div>
+    </section>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-column footer-info">
+          <h3>VerifyCall</h3>
+          <p>Building trust and security in every call.</p>
+          <p>Email: info@verifycall.com</p>
+          <p>Phone: +1 (800) 123-4567</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html#why">Why VerifyCall</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#organizations">For Organizations</a></li>
+            <li><a href="scam-alerts.html#latest-alerts">Scam Alerts</a></li>
+            <li><a href="#team-section">The Company</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="scam-alerts.html#faqs">FAQs</a></li>
+            <li>
+              <a href="scam.html">Report a Scam</a>
+            </li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Whitepapers</a></li>
+            <li><a href="#">Press & Media</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 VerifyCall. All rights reserved.
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach((item) => {
+          const questionButton = item.querySelector(".faq-question");
+          const answer = item.querySelector(".faq-answer");
+          // const icon = item.querySelector('.faq-icon'); // No longer directly manipulating textContent
+
+          questionButton.addEventListener("click", () => {
+            item.classList.toggle("active");
+            questionButton.classList.toggle("active");
+
+            if (item.classList.contains("active")) {
+              answer.style.maxHeight = answer.scrollHeight + "px";
+              // icon.textContent = '−'; // REMOVE THIS LINE
+            } else {
+              answer.style.maxHeight = "0";
+              // icon.textContent = '+'; // REMOVE THIS LINE
+            }
+          });
+        });
+      });
+    </script>
+    <script>
+      fetch("topnavigation.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

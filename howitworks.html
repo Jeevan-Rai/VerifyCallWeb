@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VerifyCall - How It Works & Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /* Global Box-sizing */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "IBM Plex Sans", sans-serif; /* Standardized font */
+        margin: 0;
+        padding: 0;
+        background-color: white;
+        color: #1a1a1a; /* Default text color from new16.html */
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Hero Section for How It Works (from ss.html) */
+      .how-it-works-hero {
+        width: 100%;
+        min-height: 80vh; /* Adjusted to take up more vertical space */
+        background: linear-gradient(
+          135deg,
+          #e0f2f7 0%,
+          #c0e0e8 100%
+        ); /* Lighter, calming gradient */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Vertically centers content */
+        text-align: center; /* Horizontally centers text */
+        padding: 60px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-content {
+        max-width: 900px;
+        z-index: 2; /* Ensures text is above any potential background elements */
+      }
+
+      .hero-content h1 {
+        font-size: clamp(2.5rem, 6vw, 4.2rem);
+        color: #1a1a2e;
+        margin-bottom: 20px;
+        font-weight: 700;
+        line-height: 1.2;
+        background: linear-gradient(90deg, #4348f3, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: fadeInDown 1s ease-out; /* Kept for initial load effect */
+      }
+
+      .hero-content p {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        color: #555;
+        line-height: 1.6;
+        max-width: 700px;
+        margin: 0 auto;
+        animation: fadeInUp 1s ease-out 0.2s both; /* Kept for initial load effect */
+      }
+
+      /* Animations for overall hero section */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive adjustments for hero */
+      @media (max-width: 768px) {
+        .how-it-works-hero {
+          padding: 40px 15px;
+        }
+
+        .hero-content h1 {
+          font-size: clamp(2rem, 5vw, 3rem);
+        }
+
+        .hero-content p {
+          font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+      }
+
+      /* Styles from new16.html for Registration and CTA sections */
+      .registration-section {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto; /* Centers the section */
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-badge {
+        display: inline-block;
+        background: #f0f9ff;
+        color: #0369a1;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        border: 1px solid #e0f2fe;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .section-subtitle {
+        font-size: 1.2rem;
+        color: #666;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .registration-flow {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 4rem;
+      }
+
+      .registration-step {
+        background: white;
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid #f0f0f0;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .registration-step:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      .step-number {
+        position: absolute;
+        top: -30px;
+        left: 2.5rem;
+        background: linear-gradient(135deg, #7790fc, #8db2f7);
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+
+      .step-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+      }
+
+      .step-description {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+
+      .step-details {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 1.2rem;
+        border-left: 4px solid #667eea;
+      }
+
+      .step-details h4 {
+        color: #1a1a1a;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      .step-details ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .step-details li {
+        color: #555;
+        font-size: 0.9rem;
+        margin-bottom: 0.3rem;
+        padding-left: 1rem;
+        position: relative;
+      }
+
+      .step-details li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #10b981;
+        font-weight: 600;
+      }
+
+      /* Styles for Steps Section (from new7.html's .steps-section) */
+      .steps-section {
+        padding: 100px 0;
+        background: white;
+        width: 100%; /* Take full width */
+        max-width: 1200px; /* Align with other sections */
+        margin: 0 auto; /* Center horizontally */
+      }
+
+      .steps-section .container {
+        max-width: 1200px; /* Ensure consistency with parent section */
+        padding: 0 20px; /* Add padding for content */
+      }
+
+      .steps-container {
+        display: grid;
+        gap: 80px;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.8s ease-out;
+      }
+
+      .step:nth-child(even) {
+        grid-template-columns: 1fr 1fr;
+        transform: translateX(50px);
+      }
+
+      .step:nth-child(even) .step-content {
+        order: 2;
+      }
+
+      .step:nth-child(even) .step-visual {
+        order: 1;
+      }
+
+      .step.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .step-content h3 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: black;
+        font-weight: 700;
+      }
+
+      .step-content p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+      }
+
+      .step-number-visual {
+        /* Renamed to avoid conflict with .step-number in registration-section */
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(45deg, #4f46e5, #7c3aed);
+        border-radius: 50%;
+        text-align: center;
+        line-height: 50px;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        animation: pulse 2s ease-in-out infinite;
+        color: white; /* Added color for visibility */
+      }
+
+      .step-visual {
+        position: relative;
+        height: 300px;
+        background: rgba(175, 206, 246, 0.1);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .phone-mockup {
+        width: 150px;
+        height: 280px;
+        background: linear-gradient(
+          145deg,
+          #334155,
+          #1e293b
+        ); /* Darker phone color */
+        border-radius: 25px;
+        position: relative;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        transform: perspective(1000px) rotateY(-10deg);
+        transition: transform 0.5s ease;
+        border: 3px solid #333333;
+      }
+
+      .phone-mockup:hover {
+        transform: perspective(1000px) rotateY(0deg);
+      }
+
+      .phone-screen {
+        position: absolute;
+        top: 20px;
+        left: 15px;
+        right: 15px;
+        bottom: 20px;
+        background: linear-gradient(
+          180deg,
+          #87ceeb,
+          #98fb98
+        ); /* Screen background */
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .phone-notch {
+        position: absolute;
+        top: -3px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 25px;
+        background: #000000;
+        border-radius: 0 0 15px 15px;
+        z-index: 2;
+      }
+
+      .phone-home-indicator {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 3px;
+        background: #333333;
+        border-radius: 2px;
+      }
+
+      .cloud {
+        position: relative;
+        width: 60px;
+        height: 20px;
+        background: white;
+        border-radius: 20px;
+        margin-bottom: 10px;
+      }
+
+      .cloud::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 15px;
+        width: 30px;
+        height: 30px;
+        background: white;
+        border-radius: 50%;
+      }
+
+      .phone-landscape {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: linear-gradient(180deg, #9acd32, #228b22);
+        border-radius: 0 0 20px 20px;
+      }
+
+      .phone-landscape::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 0;
+        right: 0;
+        height: 15px;
+        background: linear-gradient(180deg, transparent, #9acd32);
+      }
+
+      .call-animation {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        border: 3px solid #10b981;
+        border-radius: 50%;
+        animation: callPulse 2s ease-in-out infinite;
+      }
+
+      .call-animation::before {
+        content: "📞";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+      }
+
+      .verification-dots {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        background: #10b981;
+        border-radius: 50%;
+        animation: dotPulse 1.5s ease-in-out infinite;
+      }
+
+      .dot:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+
+      .dot:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      @keyframes callPulse {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      @keyframes dotPulse {
+        0%,
+        100% {
+          opacity: 0.4;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.3);
+        }
+      }
+
+      /* CTA Section */
+      .cta-section {
+        background: linear-gradient(
+          135deg,
+          #1e40af 0%,
+          #3b82f6 50%,
+          #60a5fa 100%
+        );
+        border-radius: 24px;
+        padding: 3rem 2rem;
+        margin: 4rem 2rem 2rem 2rem; /* Adjusted top margin for spacing from previous section */
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(30, 64, 175, 0.2);
+        width: 100%; /* Ensure it takes full width */
+        max-width: 1450px; /* Align with other sections */
+      }
+
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 80%,
+            rgba(147, 197, 253, 0.3) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(96, 165, 250, 0.4) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      .cta-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr; /* Changed to 1 column since visual was removed */
+        gap: 3rem;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+        text-align: center; /* Centers content now that visual is removed */
+      }
+
+      .cta-content {
+        color: white;
+      }
+
+      .cta-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        color: white;
+      }
+
+      .cta-description {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .cta-button {
+        background: white;
+        color: #1e40af;
+        padding: 1rem 2.5rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        display: inline-flex; /* Ensures button is centered */
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        background: #f8fafc;
+      }
+
+      /* Responsive adjustments for new7.html sections */
+      @media (max-width: 768px) {
+        .steps-section {
+          padding: 40px 15px;
+        }
+        .step {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        .step:nth-child(even) {
+          grid-template-columns: 1fr;
+        }
+        .step:nth-child(even) .step-content,
+        .step:nth-child(even) .step-visual {
+          order: unset;
+        }
+        .phone-mockup {
+          transform: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .steps-section .section-title {
+          font-size: 2rem;
+        }
+        .steps-section .section-subtitle {
+          font-size: 1rem;
+        }
+        .step-content h3 {
+          font-size: 2rem;
+        }
+        .step-content p {
+          font-size: 1rem;
+        }
+      }
+
+      /* Footer Styles (Copied from mm2.html) */
+      .main-footer {
+        background-color: #1f2937; /* Dark background */
+        color: #e5e7eb;
+        padding: 60px 40px;
+        font-size: 0.95em;
+        line-height: 1.6;
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 40px;
+        text-align: left;
+      }
+
+      .footer-column {
+        flex: 1 1 200px; /* Flexible columns */
+        min-width: 180px;
+      }
+
+      .footer-column h3 {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 2px;
+        background-color: #10b981; /* Highlight color */
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        color: #e5e7eb;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-column ul li a:hover {
+        color: #10b981;
+      }
+
+      .footer-info p {
+        margin-bottom: 10px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        color: #e5e7eb;
+        font-size: 1.5em;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: #10b981;
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #374151;
+        margin-top: 40px;
+        padding-top: 20px;
+        text-align: center;
+        color: #9ca3af;
+        font-size: 0.85em;
+      }
+      /**/
+      /* Navigation Bar Styles */
+      nav {
+        border-bottom: 1px solid #e5e7eb;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        width: 100%; /* Ensure nav spans full width */
+      }
+
+      nav.scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border-bottom: 1px solid #d1d5db;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 60px;
+        height: 90px;
+        position: relative;
+      }
+
+      .logo {
+        font-weight: 700;
+        font-size: 1.7rem;
+        letter-spacing: 2px;
+        color: #1f2937;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: transform 0.3s ease;
+        text-decoration: none; /* Ensure logo link doesn't have underline */
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+      }
+
+      .logo::before {
+        content: "📞";
+        font-size: 1.5rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px; /* Reduced from 32px as requested */
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nav-links li {
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #374151;
+        font-weight: 500;
+        font-size: 1rem;
+        display: inline-block;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 12px 16px;
+        border-radius: 8px;
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .nav-links li a::before {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 2px;
+        width: 0;
+        background: rgb(70, 70, 253);
+        border-radius: 1px;
+        transition: width 0.3s ease;
+      }
+
+      .nav-links li a:hover::before,
+      .nav-links li a.active::before {
+        width: 100%;
+      }
+
+      .nav-links li a:hover {
+        color: #4744fc;
+        background: rgba(16, 185, 129, 0.05);
+      }
+
+      .nav-links li a.active {
+        color: #4744fc;
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-shrink: 0;
+      }
+
+      .contact-btn {
+        background: rgb(70, 70, 253);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 28px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .contact-btn:hover {
+        background: rgb(65, 65, 230);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      }
+
+      /* Mobile Menu Toggle */
+      .mobile-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+      }
+
+      .mobile-toggle:hover {
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .mobile-toggle span {
+        width: 24px;
+        height: 3px;
+        background: #374151;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        margin: 2px 0;
+      }
+
+      .mobile-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .mobile-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid #e5e7eb;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+      }
+
+      .mobile-menu.active {
+        display: block;
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .mobile-nav-links {
+        list-style: none;
+        padding: 20px 0;
+        margin: 0;
+      }
+
+      .mobile-nav-links li {
+        padding: 0 40px;
+      }
+
+      .mobile-nav-links li a {
+        display: block;
+        padding: 16px 0;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #f3f4f6;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-nav-links li:last-child a {
+        border-bottom: none;
+      }
+
+      .mobile-nav-links li a:hover,
+      .mobile-nav-links li a.active {
+        color: #10b981;
+        padding-left: 16px;
+      }
+
+      .mobile-actions {
+        padding: 20px 40px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .mobile-actions .contact-btn {
+        justify-content: center;
+        width: 100%;
+      }
+
+      /* Notification Badge */
+      .notification-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #ef4444;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+        }
+      }
+
+      /* Enhanced link with badge */
+      .nav-links li.has-notification {
+        position: relative;
+      }
+
+      /* Dropdown styles for Desktop Navigation */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Space between text and icon */
+      }
+
+      .dropdown-icon {
+        font-size: 0.8em;
+        transition: transform 0.3s ease;
+      }
+
+      .dropdown:hover .dropdown-icon {
+        transform: rotate(180deg); /* Rotate icon on hover */
+      }
+
+      .dropdown-menu {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 100%; /* Position below the toggle */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for centering */
+        background-color: white;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        list-style: none;
+        padding: 10px 0;
+        margin: 0;
+        min-width: 180px;
+        z-index: 100; /* Ensure it's above other content */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: block; /* Show on hover */
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(5px); /* Slight slide down effect */
+      }
+
+      .dropdown-menu li a {
+        display: block;
+        padding: 10px 20px;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .dropdown-menu li a:hover {
+        background-color: #f3f4f6;
+        color: #4744fc;
+      }
+
+      /* Adjust mobile menu for dropdown */
+      @media (max-width: 768px) {
+        .mobile-nav-links .dropdown-menu {
+          position: static; /* Remove absolute positioning */
+          box-shadow: none;
+          border-radius: 0;
+          border-top: 1px solid #f3f4f6; /* Add a separator */
+          padding: 0;
+          min-width: unset;
+          opacity: 1; /* Always visible in mobile when parent is active */
+          visibility: visible;
+          transform: none;
+        }
+
+        .mobile-nav-links .dropdown-menu li a {
+          padding-left: 60px; /* Indent dropdown items */
+          border-bottom: none; /* Remove extra border for sub-items */
+          background-color: #f9f9f9; /* Slightly different background for sub-items */
+        }
+
+        .mobile-nav-links .dropdown-toggle {
+          /* This ensures the main "The Company" link in mobile still has its border */
+          border-bottom: 1px solid #f3f4f6;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .nav-container {
+          padding: 0 40px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        /* Navigation specific */
+        .nav-container {
+          padding: 0 30px;
+        }
+        .nav-links {
+          gap: 15px; /* Further reduce gap on smaller screens */
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Navigation specific */
+        .nav-container {
+          height: 80px;
+          padding: 0 20px;
+        }
+
+        .logo {
+          font-size: 1.6rem;
+        }
+
+        .nav-links,
+        .nav-actions {
+          display: none;
+        }
+
+        .mobile-toggle {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <nav id="navbar">
+      <div class="nav-container">
+        <div class="logo">VERIFYCALL</div>
+
+        <ul class="nav-links">
+          <li><a href="#why" class="nav-link">Why VerifyCall</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li>
+            <a href="#organizations" class="nav-link">For Organizations</a>
+          </li>
+          <li class="has-notification">
+            <a href="#scam-alerts" class="nav-link">Scam Alerts</a>
+            <span class="notification-badge">!</span>
+          </li>
+          <li><a href="#company" class="nav-link">The Company</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button class="contact-btn">Contact Us</button>
+        </div>
+
+        <div class="mobile-toggle" id="mobileToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+          <li>
+            <a href="new3.html" class="mobile-nav-link">Why VerifyCall</a>
+          </li>
+          <li>
+            <a href="#how-it-works" class="mobile-nav-link">How It Works</a>
+          </li>
+          <li>
+            <a href="mm2.html" class="mobile-nav-link">For Organizations</a>
+          </li>
+          <li>
+            <a href="#scam-alerts" class="mobile-nav-link"
+              >Scam Alerts <span style="color: #ef4444">●</span></a
+            >
+          </li>
+          <li><a href="#company" class="mobile-nav-link">The Company</a></li>
+        </ul>
+        <div class="mobile-actions">
+          <button class="contact-btn">
+            <span>💬</span>
+            Contact Us
+          </button>
+        </div>
+      </div>
+    </nav> -->
+    <nav id="navbar">
+      <div class="nav-container">
+        <a href="index2.html" class="logo">VERIFYCALL</a>
+
+        <ul class="nav-links">
+          <li>
+            <a href="whyverifycall.html" class="nav-link">Why VerifyCall</a>
+          </li>
+          <li>
+            <a href="howitworks.html" class="nav-link">How It Works</a>
+          </li>
+          <li>
+            <a href="fororganisation.html" class="nav-link"
+              >For Organizations</a
+            >
+          </li>
+          <li class="has-notification">
+            <a href="scam.html" class="nav-link">Scam Alerts</a>
+            <span class="notification-badge">!</span>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle"
+              >The Company <i class="fas fa-chevron-down dropdown-icon"></i
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="theteam.html#team-section">The Team</a></li>
+              <li><a href="contactus.html">FAQs</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="nav-actions">
+          <button
+            class="contact-btn"
+            onclick="window.location.href='contactus.html'"
+          >
+            Contact Us
+          </button>
+        </div>
+
+        <div class="mobile-toggle" id="mobileToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+          <li>
+            <a href="whyverifycall.html" class="mobile-nav-link"
+              >Why VerifyCall</a
+            >
+          </li>
+          <li>
+            <a href="howitworks.html" class="mobile-nav-link">How It Works</a>
+          </li>
+          <li>
+            <a href="fororganisation.html" class="mobile-nav-link"
+              >For Organizations</a
+            >
+          </li>
+          <li>
+            <a href="scam.html" class="mobile-nav-link"
+              >Scam Alerts <span style="color: #ef4444">●</span></a
+            >
+          </li>
+          <li class="dropdown">
+            <a href="#" class="mobile-nav-link dropdown-toggle"
+              >The Company <i class="fas fa-chevron-down dropdown-icon"></i
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="theteam.html">The Team</a></li>
+              <li><a href="contactus.html">FAQs</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="mobile-actions">
+          <button
+            class="contact-btn"
+            onclick="window.location.href='company.html#contact-section'"
+          >
+            <span>💬</span>
+            Contact Us
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <section class="how-it-works-hero">
+      <div class="hero-content">
+        <h1>The VerifyCall Journey: From Uncertainty to Verified Trust.</h1>
+        <p>
+          Witness the seamless process that transforms every outbound call into
+          a recognized and trusted interaction.
+        </p>
+      </div>
+    </section>
+
+    <section class="registration-section">
+      <div class="section-header">
+        <div class="section-badge">User Registration</div>
+        <h2 class="section-title">
+          Ready to receive Verified Calls? Here’s How to Start
+        </h2>
+        <p class="section-subtitle">
+          Join thousands of users who trust VerifyCall to protect them from
+          unwanted calls. Getting started is quick, easy, and completely secure.
+        </p>
+      </div>
+
+      <div class="registration-flow">
+        <div class="registration-step">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Download & Install</h3>
+          <p class="step-description">
+            Download VerifyCall from your app store and install it on your
+            smartphone in seconds.
+          </p>
+          <div class="step-details">
+            <h4>Available On:</h4>
+            <ul>
+              <li>iOS App Store (iPhone)</li>
+              <li>Google Play Store (Android)</li>
+              <li>Compatible with all modern smartphones</li>
+              <li>Free download with no hidden costs</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="registration-step">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Create Your Account</h3>
+          <p class="step-description">
+            Set up your personal account with basic information to personalize
+            your protection experience.
+          </p>
+          <div class="step-details">
+            <h4>Quick Setup Requires:</h4>
+            <ul>
+              <li>Valid email address</li>
+              <li>Phone number verification</li>
+              <li>Choose your notification preferences</li>
+              <li>Set privacy and security settings</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="registration-step">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Activate Protection</h3>
+          <p class="step-description">
+            Enable call protection features and start receiving verified caller
+            notifications immediately.
+          </p>
+          <div class="step-details">
+            <h4>Protection Features:</h4>
+            <ul>
+              <li>Real-time caller identification</li>
+              <li>Scam call alerts and warnings</li>
+              <li>Verified organization notifications</li>
+              <li>Customizable blocking preferences</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">VerifyCall Protection</h2>
+          <p class="section-subtitle">
+            Advanced AI-powered call verification to protect you from scams and
+            unwanted calls
+          </p>
+        </div>
+        <div class="steps-container">
+          <div class="step">
+            <div class="step-content">
+              <div class="step-number-visual">1</div>
+              <h3>Incoming Call Detection</h3>
+              <p>
+                Our AI-powered system instantly detects incoming calls and
+                analyzes caller patterns in real-time. Advanced algorithms
+                cross-reference multiple databases to identify potential threats
+                before they reach you.
+              </p>
+            </div>
+            <div class="step-visual">
+              <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="cloud"></div>
+                  <div class="phone-landscape"></div>
+                  <div class="call-animation"></div>
+                </div>
+                <div class="phone-home-indicator"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-content">
+              <div class="step-number-visual">2</div>
+              <h3>Real-Time Verification</h3>
+              <p>
+                Within milliseconds, our system performs comprehensive
+                verification checks including number authenticity, carrier
+                validation, and spam database comparison. Machine learning
+                models continuously improve accuracy.
+              </p>
+            </div>
+            <div class="step-visual">
+              <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="cloud"></div>
+                  <div class="phone-landscape"></div>
+                  <div class="verification-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                  </div>
+                </div>
+                <div class="phone-home-indicator"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-content">
+              <div class="step-number-visual">3</div>
+              <h3>Real Time Scam Alerts</h3>
+              <p>
+                Get immediate feedback on call legitimacy with color-coded
+                indicators. Green for verified, yellow for caution, red for
+                block. Smart notifications keep you informed without
+                interruption.
+              </p>
+            </div>
+            <div class="step-visual">
+              <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="cloud"></div>
+                  <div class="phone-landscape"></div>
+                  <div
+                    style="
+                      position: absolute;
+                      top: 30px;
+                      left: 20px;
+                      right: 20px;
+                      padding: 15px;
+                      background: rgba(16, 185, 129, 0.2);
+                      border-radius: 10px;
+                      border-left: 4px solid #10b981;
+                    "
+                  >
+                    <div
+                      style="font-size: 12px; font-weight: bold; color: #10b981"
+                    >
+                      ✓ VERIFIED CALLER
+                    </div>
+                    <div style="font-size: 10px; color: #fff; margin-top: 5px">
+                      Safe to answer
+                    </div>
+                  </div>
+                </div>
+                <div class="phone-home-indicator"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="cta-container">
+        <div class="cta-content">
+          <h2 class="cta-title">
+            Stop missing important calls from trusted organizations
+          </h2>
+          <p class="cta-description">
+            Learn how VerifyCall can make your phone calls more recognizable and
+            help you never miss important communications from verified
+            organizations again.
+          </p>
+          <button class="cta-button">Download VerifyCall</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-column footer-info">
+          <h3>VerifyCall</h3>
+          <p>Building trust and security in every call.</p>
+          <p>Email: info@verifycall.com</p>
+          <p>Phone: +1 (800) 123-4567</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html#why">Why VerifyCall</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#organizations">For Organizations</a></li>
+            <li><a href="scam-alerts.html#latest-alerts">Scam Alerts</a></li>
+            <li><a href="#team-section">The Company</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="scam-alerts.html#report-scam">Report a Scam</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Whitepapers</a></li>
+            <li><a href="#">Press & Media</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 VerifyCall. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      // Intersection Observer for step animations
+      const observerOptions = {
+        threshold: 0.3,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".step").forEach((step) => {
+        observer.observe(step);
+      });
+
+      // Scroll effect for navbar
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile menu toggle
+      mobileToggle.addEventListener("click", () => {
+        mobileToggle.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!navbar.contains(e.target) && !mobileToggle.contains(e.target)) {
+          mobileToggle.classList.remove("active");
+          mobileMenu.classList.remove("active");
+        }
+      });
+
+      // Active link functionality for desktop
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          navLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Smooth scroll to section (if implementing single page)
+          const targetId = link.getAttribute("href");
+          if (targetId.startsWith("#")) {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      // Active link functionality for mobile
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          mobileNavLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Close mobile menu
+          mobileToggle.classList.remove("active");
+          mobileMenu.classList.remove("active");
+
+          // Smooth scroll to section
+          const targetId = link.getAttribute("href");
+          if (targetId.startsWith("#")) {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      document.querySelector(".contact-btn").addEventListener("click", () => {
+        // Add your contact logic here
+        window.location.href = "mailto:contact@verifycall.com";
+      });
+
+      // Set active link based on current page
+      const currentPage = window.location.pathname;
+      if (currentPage.includes("whypage")) {
+        document.querySelector('a[href="#why"]').classList.add("active");
+      }
+
+      // Enhanced phone mockup interactions (for steps section)
+      document.querySelectorAll(".phone-mockup").forEach((phone) => {
+        phone.addEventListener("mouseenter", () => {
+          phone.style.transform =
+            "perspective(1000px) rotateY(0deg) scale(1.05)";
+        });
+
+        phone.addEventListener("mouseleave", () => {
+          phone.style.transform =
+            "perspective(1000px) rotateY(-10deg) scale(1)";
+        });
+      });
+    </script>
+
+    <script>
+      const navbar = document.getElementById("navbar");
+      const mobileToggle = document.getElementById("mobileToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const navLinks = document.querySelectorAll(".nav-link");
+      const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+      // Scroll effect for navbar
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile menu toggle
+      mobileToggle.addEventListener("click", () => {
+        mobileToggle.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!navbar.contains(e.target) && !mobileToggle.contains(e.target)) {
+          mobileToggle.classList.remove("active");
+          mobileMenu.classList.remove("active");
+        }
+      });
+
+      // Active link functionality for desktop
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          navLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Smooth scroll to section if it's an internal link (starts with #)
+          const targetId = link.getAttribute("href");
+          if (targetId && targetId.startsWith("#")) {
+            e.preventDefault(); // Prevent default only for internal hash links
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      // Active link functionality for mobile
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          mobileNavLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Close mobile menu
+          mobileToggle.classList.remove("active");
+          mobileMenu.classList.remove("active");
+
+          // Smooth scroll to section if it's an internal link (starts with #)
+          const targetId = link.getAttribute("href");
+          if (targetId && targetId.startsWith("#")) {
+            e.preventDefault(); // Prevent default only for internal hash links
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      // Set active link based on current page
+      const currentPage = window.location.pathname.split("/").pop(); // Get just the filename
+
+      // Function to set active class based on current page
+      function setActiveLink() {
+        navLinks.forEach((link) => {
+          const linkHref = link.getAttribute("href");
+          if (linkHref && linkHref.includes(currentPage)) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        mobileNavLinks.forEach((link) => {
+          const linkHref = link.getAttribute("href");
+          if (linkHref && linkHref.includes(currentPage)) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        // Handle active class for "The Company" dropdown specifically
+        const companyDropdownToggle = document.querySelector(
+          ".nav-links .dropdown .dropdown-toggle"
+        );
+        const mobileCompanyDropdownToggle = document.querySelector(
+          ".mobile-nav-links .dropdown .dropdown-toggle"
+        );
+
+        if (currentPage.includes("company.html")) {
+          if (companyDropdownToggle)
+            companyDropdownToggle.classList.add("active");
+          if (mobileCompanyDropdownToggle)
+            mobileCompanyDropdownToggle.classList.add("active");
+        } else {
+          if (companyDropdownToggle)
+            companyDropdownToggle.classList.remove("active");
+          if (mobileCompanyDropdownToggle)
+            mobileCompanyDropdownToggle.classList.remove("active");
+        }
+      }
+
+      // Call setActiveLink on page load
+      setActiveLink();
+
+      // Potentially re-call setActiveLink on hash change for same-page navigation
+      window.addEventListener("hashchange", setActiveLink);
+    </script>
+  </body>
+</html>

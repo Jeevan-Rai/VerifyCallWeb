@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: white;
+        background: white;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 5px;
+      }
+
+      /* Animated Background */
+      .bg-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: white;
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+      }
+
+      .bg-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        z-index: -1;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Header Section */
+      .header {
+        padding: 100px 0 50px;
+        text-align: center;
+        position: relative;
+      }
+
+      .header h1 {
+        font-size: 3.2rem;
+        font-weight: 600;
+        background: black;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 20px;
+        animation: slideInDown 1s ease-out;
+      }
+
+      .header p {
+        font-size: 1.3rem;
+        color: #666;
+        max-width: 600px;
+        margin: 0 auto;
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      /* Main Content */
+      .main-content {
+        padding: 50px 0;
+      }
+
+      .contact-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: start;
+      }
+
+      /* Contact Form */
+      .contact-form {
+        background: white;
+        padding: 50px;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+        animation: slideInLeft 1s ease-out 0.5s both;
+      }
+
+      .contact-form::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+          from 0deg,
+          transparent,
+          rgba(102, 126, 234, 0.05),
+          transparent
+        );
+        animation: rotate 20s linear infinite;
+      }
+
+      .form-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .form-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+        position: relative;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #e1e8f0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: #f8f9ff;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #667eea;
+        background: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+      }
+
+      .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .form-label {
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        color: #666;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        background: transparent;
+        padding: 0 5px;
+      }
+
+      .form-input:focus + .form-label,
+      .form-input:not(:placeholder-shown) + .form-label {
+        top: -10px;
+        left: 15px;
+        font-size: 0.8rem;
+        color: #667eea;
+        background: white;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 18px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+      }
+
+      .submit-btn:active {
+        transform: translateY(0);
+      }
+
+      /* Contact Info */
+      .contact-info {
+        animation: slideInRight 1s ease-out 0.7s both;
+      }
+
+      .info-card {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
+        transition: transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .info-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(102, 126, 234, 0.1),
+          transparent
+        );
+        /* transition: left 0.6s ease; */
+      }
+
+      .info-card:hover::before {
+        left: 100%;
+      }
+
+      .info-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .info-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .info-icon {
+        width: 60px;
+        height: 60px;
+        background: #667eea;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin-right: 20px;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+      }
+
+      .info-text h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .info-text p {
+        color: #666;
+        font-size: 1rem;
+      }
+
+      /* Map Section */
+      .map-section {
+        margin-top: 60px;
+        text-align: center;
+      }
+
+      .map-container {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .map-placeholder {
+        width: 100%;
+        height: 300px;
+        background: linear-gradient(135deg, #f8f9ff, #e8f2ff);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: #667eea;
+        border: 2px dashed #667eea;
+      }
+
+      /* Social Links */
+      .social-section {
+        text-align: center;
+        margin-top: 60px;
+      }
+
+      .social-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 30px;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .social-link {
+        width: 70px;
+        height: 70px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #667eea;
+        font-size: 1.8rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .social-link::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        transform: scale(0);
+        transition: transform 0.3s ease;
+        border-radius: 50%;
+      }
+
+      .social-link:hover::before {
+        transform: scale(1);
+      }
+
+      .social-link:hover {
+        color: white;
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+      }
+
+      .social-link i {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Animations */
+      @keyframes slideInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2.5rem;
+        }
+
+        .contact-wrapper {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .contact-form {
+          padding: 30px;
+        }
+
+        .info-card {
+          padding: 25px;
+        }
+
+        .social-links {
+          gap: 15px;
+        }
+
+        .social-link {
+          width: 60px;
+          height: 60px;
+          font-size: 1.5rem;
+        }
+      }
+
+      /* Success Message */
+      .success-message {
+        display: none;
+        background: linear-gradient(135deg, #4caf50, #45a049);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+        text-align: center;
+        animation: fadeInUp 0.5s ease-out;
+      }
+
+      /* Footer Styles (Copied from mm2.html) */
+      .main-footer {
+        background-color: #1f2937; /* Dark background */
+        color: #e5e7eb;
+        padding: 60px 40px;
+        font-size: 0.95em;
+        line-height: 1.6;
+        width: 100%;
+        text-align: center;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 40px;
+        text-align: left;
+      }
+
+      .footer-column {
+        flex: 1 1 200px; /* Flexible columns */
+        min-width: 180px;
+      }
+
+      .footer-column h3 {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 2px;
+        background-color: #10b981; /* Highlight color */
+      }
+
+      .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        color: #e5e7eb;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-column ul li a:hover {
+        color: #10b981;
+      }
+
+      .footer-info p {
+        margin-bottom: 10px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        color: black;
+        font-size: 1.5em;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #374151;
+        margin-top: 40px;
+        padding-top: 20px;
+        text-align: center;
+        color: #9ca3af;
+        font-size: 0.85em;
+      }
+      /**/
+      /* Navigation Bar Styles */
+      nav {
+        border-bottom: 1px solid #e5e7eb;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        width: 100%; /* Ensure nav spans full width */
+      }
+
+      nav.scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border-bottom: 1px solid #d1d5db;
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 60px;
+        height: 90px;
+        position: relative;
+      }
+
+      .logo {
+        font-weight: 700;
+        font-size: 1.7rem;
+        letter-spacing: 2px;
+        color: #1f2937;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: transform 0.3s ease;
+        text-decoration: none; /* Ensure logo link doesn't have underline */
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+      }
+
+      .logo::before {
+        content: "📞";
+        font-size: 1.5rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px; /* Reduced from 32px as requested */
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nav-links li {
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #374151;
+        font-weight: 500;
+        font-size: 1rem;
+        display: inline-block;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 12px 16px;
+        border-radius: 8px;
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .nav-links li a::before {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 2px;
+        width: 0;
+        background: rgb(70, 70, 253);
+        border-radius: 1px;
+        transition: width 0.3s ease;
+      }
+
+      .nav-links li a:hover::before,
+      .nav-links li a.active::before {
+        width: 100%;
+      }
+
+      .nav-links li a:hover {
+        color: #4744fc;
+        background: rgba(16, 185, 129, 0.05);
+      }
+
+      .nav-links li a.active {
+        color: #4744fc;
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-shrink: 0;
+      }
+
+      .contact-btn {
+        background: rgb(70, 70, 253);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 28px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .contact-btn:hover {
+        background: rgb(65, 65, 230);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      }
+
+      /* Mobile Menu Toggle */
+      .mobile-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 6px;
+        transition: background 0.3s ease;
+      }
+
+      .mobile-toggle:hover {
+        background: rgba(16, 185, 129, 0.1);
+      }
+
+      .mobile-toggle span {
+        width: 24px;
+        height: 3px;
+        background: #374151;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        margin: 2px 0;
+      }
+
+      .mobile-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .mobile-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid #e5e7eb;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+      }
+
+      .mobile-menu.active {
+        display: block;
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .mobile-nav-links {
+        list-style: none;
+        padding: 20px 0;
+        margin: 0;
+      }
+
+      .mobile-nav-links li {
+        padding: 0 40px;
+      }
+
+      .mobile-nav-links li a {
+        display: block;
+        padding: 16px 0;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #f3f4f6;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-nav-links li:last-child a {
+        border-bottom: none;
+      }
+
+      .mobile-nav-links li a:hover,
+      .mobile-nav-links li a.active {
+        color: #10b981;
+        padding-left: 16px;
+      }
+
+      .mobile-actions {
+        padding: 20px 40px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .mobile-actions .contact-btn {
+        justify-content: center;
+        width: 100%;
+      }
+
+      /* Notification Badge */
+      .notification-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: #ef4444;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+        }
+      }
+
+      /* Enhanced link with badge */
+      .nav-links li.has-notification {
+        position: relative;
+      }
+
+      /* Dropdown styles for Desktop Navigation */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Space between text and icon */
+      }
+
+      .dropdown-icon {
+        font-size: 0.8em;
+        transition: transform 0.3s ease;
+      }
+
+      .dropdown:hover .dropdown-icon {
+        transform: rotate(180deg); /* Rotate icon on hover */
+      }
+
+      .dropdown-menu {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 100%; /* Position below the toggle */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for centering */
+        background-color: white;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        list-style: none;
+        padding: 10px 0;
+        margin: 0;
+        min-width: 180px;
+        z-index: 100; /* Ensure it's above other content */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: block; /* Show on hover */
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(5px); /* Slight slide down effect */
+      }
+
+      .dropdown-menu li a {
+        display: block;
+        padding: 10px 20px;
+        color: #374151;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .dropdown-menu li a:hover {
+        background-color: #f3f4f6;
+        color: #4744fc;
+      }
+
+      /* Adjust mobile menu for dropdown */
+      @media (max-width: 768px) {
+        .mobile-nav-links .dropdown-menu {
+          position: static; /* Remove absolute positioning */
+          box-shadow: none;
+          border-radius: 0;
+          border-top: 1px solid #f3f4f6; /* Add a separator */
+          padding: 0;
+          min-width: unset;
+          opacity: 1; /* Always visible in mobile when parent is active */
+          visibility: visible;
+          transform: none;
+        }
+
+        .mobile-nav-links .dropdown-menu li a {
+          padding-left: 60px; /* Indent dropdown items */
+          border-bottom: none; /* Remove extra border for sub-items */
+          background-color: #f9f9f9; /* Slightly different background for sub-items */
+        }
+
+        .mobile-nav-links .dropdown-toggle {
+          /* This ensures the main "The Company" link in mobile still has its border */
+          border-bottom: 1px solid #f3f4f6;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .nav-container {
+          padding: 0 40px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        /* Navigation specific */
+        .nav-container {
+          padding: 0 30px;
+        }
+        .nav-links {
+          gap: 15px; /* Further reduce gap on smaller screens */
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Navigation specific */
+        .nav-container {
+          height: 80px;
+          padding: 0 20px;
+        }
+
+        .logo {
+          font-size: 1.6rem;
+        }
+
+        .nav-links,
+        .nav-actions {
+          display: none;
+        }
+
+        .mobile-toggle {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <div class="nav-container">
+        <a href="index2.html" class="logo">VERIFYCALL</a>
+
+        <ul class="nav-links">
+          <li>
+            <a href="whyverifycall.html" class="nav-link">Why VerifyCall</a>
+          </li>
+          <li>
+            <a href="howitworks.html" class="nav-link">How It Works</a>
+          </li>
+          <li>
+            <a href="fororganisation.html" class="nav-link"
+              >For Organizations</a
+            >
+          </li>
+          <li class="has-notification">
+            <a href="scam.html" class="nav-link">Scam Alerts</a>
+            <span class="notification-badge">!</span>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle"
+              >The Company <i class="fas fa-chevron-down dropdown-icon"></i
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="theteam.html#team-section">The Team</a></li>
+              <li><a href="contactus.html">FAQs</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="nav-actions">
+          <button
+            class="contact-btn"
+            onclick="window.location.href='contactus.html'"
+          >
+            Contact Us
+          </button>
+        </div>
+
+        <div class="mobile-toggle" id="mobileToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+          <li>
+            <a href="whyverifycall.html" class="mobile-nav-link"
+              >Why VerifyCall</a
+            >
+          </li>
+          <li>
+            <a href="howitworks.html" class="mobile-nav-link">How It Works</a>
+          </li>
+          <li>
+            <a href="fororganisation.html" class="mobile-nav-link"
+              >For Organizations</a
+            >
+          </li>
+          <li>
+            <a href="scam.html" class="mobile-nav-link"
+              >Scam Alerts <span style="color: #ef4444">●</span></a
+            >
+          </li>
+          <li class="dropdown">
+            <a href="#" class="mobile-nav-link dropdown-toggle"
+              >The Company <i class="fas fa-chevron-down dropdown-icon"></i
+            ></a>
+            <ul class="dropdown-menu">
+              <li><a href="theteam.html">The Team</a></li>
+              <li><a href="contactus.html">FAQs</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="mobile-actions">
+          <button
+            class="contact-btn"
+            onclick="window.location.href='company.html#contact-section'"
+          >
+            <span>💬</span>
+            Contact Us
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Header -->
+    <section class="header">
+      <div class="container">
+        <h1>Get In Touch</h1>
+        <p>
+          We'd love to hear from you. Send us a message and we'll respond as
+          soon as possible.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+      <div class="container">
+        <div class="contact-wrapper">
+          <!-- Contact Form -->
+          <div class="contact-form">
+            <div class="form-content">
+              <h2 class="form-title">Send us a Message</h2>
+              <form id="contactForm">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder=" "
+                    required
+                  />
+                  <label class="form-label">Full Name</label>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-input"
+                    placeholder=" "
+                    required
+                  />
+                  <label class="form-label">Email Address</label>
+                </div>
+                <div class="form-group">
+                  <input type="tel" class="form-input" placeholder=" " />
+                  <label class="form-label">Phone Number</label>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-input"
+                    placeholder=" "
+                    required
+                  />
+                  <label class="form-label">Subject</label>
+                </div>
+                <div class="form-group">
+                  <textarea
+                    class="form-input form-textarea"
+                    placeholder=" "
+                    required
+                  ></textarea>
+                  <label class="form-label">Your Message</label>
+                </div>
+                <button type="submit" class="submit-btn">
+                  <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+                <div class="success-message" id="successMessage">
+                  <i class="fas fa-check-circle"></i> Message sent successfully!
+                  We'll get back to you soon.
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="contact-info">
+            <div class="info-card">
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="info-text">
+                  <h3>Our Address</h3>
+                  <p>123 Business Street<br />Suite 100, City, State 12345</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="info-text">
+                  <h3>Phone Number</h3>
+                  <p>+1 (555) 123-4567<br />Mon - Fri, 9AM - 6PM</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-text">
+                  <h3>Email Address</h3>
+                  <p>verifycall@adroitx.com<br />support@adroitx.com</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="info-text">
+                  <h3>Business Hours</h3>
+                  <p>
+                    Monday - Friday: 9:00 AM - 6:00 PM<br />
+
+                    Saturday and Sunday: Closed
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-section">
+          <div class="map-container">
+            <h3 style="margin-bottom: 20px; color: #333; font-size: 1.5rem">
+              Find Us Here
+            </h3>
+            <div class="map-placeholder">
+              <i class="fas fa-map-marked-alt"></i>
+            </div>
+            <!-- <p style="margin-top: 15px; color: #666">
+              Interactive map would be embedded here
+            </p> -->
+          </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="social-section">
+          <h2 class="social-title">Connect With Us</h2>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-column footer-info">
+          <h3>VerifyCall</h3>
+          <p>Building trust and security in every call.</p>
+          <p>Email: info@verifycall.com</p>
+          <p>Phone: +1 (800) 123-4567</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html#why">Why VerifyCall</a></li>
+            <li><a href="index.html#how-it-works">How It Works</a></li>
+            <li><a href="index.html#organizations">For Organizations</a></li>
+            <li><a href="scam-alerts.html#latest-alerts">Scam Alerts</a></li>
+            <li><a href="#team-section">The Company</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="scam-alerts.html#faqs">FAQs</a></li>
+            <li><a href="scam-alerts.html#report-scam">Report a Scam</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Whitepapers</a></li>
+            <li><a href="#">Press & Media</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 VerifyCall. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      // Form submission handler
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Simulate form submission
+          const submitBtn = this.querySelector(".submit-btn");
+          const successMessage = document.getElementById("successMessage");
+
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Sending...';
+          submitBtn.disabled = true;
+
+          setTimeout(() => {
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+            successMessage.style.display = "block";
+
+            setTimeout(() => {
+              submitBtn.innerHTML =
+                '<i class="fas fa-paper-plane"></i> Send Message';
+              submitBtn.disabled = false;
+              this.reset();
+              successMessage.style.display = "none";
+            }, 3000);
+          }, 2000);
+        });
+
+      // Add interactive hover effects
+      document.querySelectorAll(".info-card").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px) scale(1.02)";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+        });
+      });
+
+      // Floating animation for form
+      document
+        .querySelector(".contact-form")
+        .addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-5px)";
+        });
+
+      document
+        .querySelector(".contact-form")
+        .addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0)";
+        });
+    </script>
+
+    <script>
+      const navbar = document.getElementById("navbar");
+      const mobileToggle = document.getElementById("mobileToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const navLinks = document.querySelectorAll(".nav-link");
+      const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+      // Scroll effect for navbar
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile menu toggle
+      mobileToggle.addEventListener("click", () => {
+        mobileToggle.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!navbar.contains(e.target) && !mobileToggle.contains(e.target)) {
+          mobileToggle.classList.remove("active");
+          mobileMenu.classList.remove("active");
+        }
+      });
+
+      // Active link functionality for desktop
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          navLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Smooth scroll to section if it's an internal link (starts with #)
+          const targetId = link.getAttribute("href");
+          if (targetId && targetId.startsWith("#")) {
+            e.preventDefault(); // Prevent default only for internal hash links
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      // Active link functionality for mobile
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          mobileNavLinks.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Close mobile menu
+          mobileToggle.classList.remove("active");
+          mobileMenu.classList.remove("active");
+
+          // Smooth scroll to section if it's an internal link (starts with #)
+          const targetId = link.getAttribute("href");
+          if (targetId && targetId.startsWith("#")) {
+            e.preventDefault(); // Prevent default only for internal hash links
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      // Set active link based on current page
+      const currentPage = window.location.pathname.split("/").pop(); // Get just the filename
+
+      // Function to set active class based on current page
+      function setActiveLink() {
+        navLinks.forEach((link) => {
+          const linkHref = link.getAttribute("href");
+          if (linkHref && linkHref.includes(currentPage)) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        mobileNavLinks.forEach((link) => {
+          const linkHref = link.getAttribute("href");
+          if (linkHref && linkHref.includes(currentPage)) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        // Handle active class for "The Company" dropdown specifically
+        const companyDropdownToggle = document.querySelector(
+          ".nav-links .dropdown .dropdown-toggle"
+        );
+        const mobileCompanyDropdownToggle = document.querySelector(
+          ".mobile-nav-links .dropdown .dropdown-toggle"
+        );
+
+        if (currentPage.includes("company.html")) {
+          if (companyDropdownToggle)
+            companyDropdownToggle.classList.add("active");
+          if (mobileCompanyDropdownToggle)
+            mobileCompanyDropdownToggle.classList.add("active");
+        } else {
+          if (companyDropdownToggle)
+            companyDropdownToggle.classList.remove("active");
+          if (mobileCompanyDropdownToggle)
+            mobileCompanyDropdownToggle.classList.remove("active");
+        }
+      }
+
+      // Call setActiveLink on page load
+      setActiveLink();
+
+      // Potentially re-call setActiveLink on hash change for same-page navigation
+      window.addEventListener("hashchange", setActiveLink);
+    </script>
+  </body>
+</html>
